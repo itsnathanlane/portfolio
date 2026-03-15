@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathan Lane — Entertainment & Social Media Marketing</title>
+<meta name="description" content="Nathan Lane is an entertainment social media strategist specializing in brand activations, content strategy, and audience growth for entertainment brands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & VARIABLES ============ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #FAFAFA;
+  --bg-alt: #F2F2F2;
+  --surface: #EBEBEB;
+  --surface-2: #E0E0E0;
+  --border: rgba(0,0,0,0.07);
+  --border-hover: rgba(0,0,0,0.18);
+  --text: #0D0D0D;
+  --text-dim: #5A5A5A;
+  --text-muted: #9A9A9A;
+  --accent: #0D0D0D;
+  --accent-color: #9A9A9A;
+  --card-bg: #FFFFFF;
+  --nav-bg: rgba(250,250,250,0.88);
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 16px;
+  --icon-filter: brightness(0) saturate(100%) invert(65%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%);
+}
+
+[data-theme="dark"] {
+  --bg: #0B0B0B;
+  --bg-alt: #121212;
+  --surface: #1C1C1C;
+  --surface-2: #252525;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.18);
+  --text: #ECECEC;
+  --text-dim: #8C8C8C;
+  --text-muted: #555555;
+  --accent: #ECECEC;
+  --accent-color: #9A9A9A;
+  --card-bg: #141414;
+  --nav-bg: rgba(11,11,11,0.88);
+  --icon-filter: brightness(0) invert(1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: var(--bg); }
+
+
+/* ============ LOADER ============ */
+
+
+/* ============ NAV ============ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s ease;
+  background: var(--nav-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+nav.scrolled {
+  padding: 14px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.05rem; letter-spacing: -0.04em; cursor: pointer;
+}
+.nav-logo span { opacity: 0.35; }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--text-dim); transition: color 0.3s; letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 100px;
+  background: var(--text); color: var(--bg);
+  font-size: 0.8rem; font-weight: 600;
+  transition: all 0.3s var(--ease); cursor: pointer; border: none;
+  font-family: var(--font-body); letter-spacing: 0.01em;
+}
+.nav-cta:hover { transform: translateY(-1px); opacity: 0.85; }
+.nav-cta svg { width: 14px; height: 14px; }
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex; width: 52px; height: 26px; padding: 3px;
+  border-radius: 100px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface);
+  transition: all 0.3s ease; position: relative; align-items: center;
+}
+.toggle-thumb {
+  width: 20px; height: 20px; border-radius: 50%; background: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s var(--ease); position: absolute; left: 3px;
+}
+[data-theme="dark"] .toggle-thumb { transform: translateX(26px); }
+.toggle-thumb svg { width: 11px; height: 11px; stroke: var(--bg); stroke-width: 2; fill: none; }
+.toggle-icon-inactive { position: absolute; right: 7px; display: flex; align-items: center; justify-content: center; }
+[data-theme="dark"] .toggle-icon-inactive { left: 7px; right: auto; }
+.toggle-icon-inactive svg { width: 11px; height: 11px; stroke: var(--text-muted); stroke-width: 2; fill: none; }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s var(--ease); }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--bg); opacity: 0.98;
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text); transition: opacity 0.3s; }
+.mobile-nav a:hover { opacity: 0.5; }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 160px 48px 100px; text-align: center; position: relative;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 28px;
+  padding: 8px 18px; border-radius: 100px;
+  border: 1px solid var(--border); background: var(--bg-alt);
+}
+.hero-tag .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px 2px rgba(34, 197, 94, 0.5), 0 0 12px 4px rgba(34, 197, 94, 0.2);
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.05; letter-spacing: -0.045em;
+  max-width: 880px;
+}
+.hero-word-wrap {
+  display: block; position: relative;
+  height: 1.3em; overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
+.hero-word {
+  position: absolute; left: 0; right: 0; text-align: center;
+  opacity: 0;
+  color: var(--text-dim); font-style: italic; font-weight: 700;
+  white-space: nowrap;
+}
+.hero-word.active { opacity: 1; animation: wordIn 0.5s var(--ease) forwards; }
+.hero-word.exit { opacity: 0; animation: wordOut 0.35s var(--ease) forwards; pointer-events: none; }
+@keyframes wordIn {
+  0% { opacity: 0; transform: translateY(100%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes wordOut {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-80%); }
+}
+.hero-sub {
+  font-size: 1.05rem; font-weight: 400;
+  color: var(--text-dim); max-width: 480px;
+  line-height: 1.7; margin: 32px auto 40px;
+}
+/* ---- Hero ambient blobs ---- */
+.hero-glow {
+  position: absolute; top: -180px; right: -160px;
+  width: 780px; height: 780px;
+  background: radial-gradient(circle, rgba(251,191,36,0.11) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+.hero-glow-2 {
+  position: absolute; bottom: -100px; left: -140px;
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(251,191,36,0.055) 0%, transparent 68%);
+  pointer-events: none; z-index: 0;
+}
+/* ---- Floating stat badges ---- */
+.hf-badge {
+  position: absolute; z-index: 10;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 11px 16px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  display: flex; align-items: center; gap: 10px;
+  white-space: nowrap; pointer-events: none;
+}
+.hf-badge-1 { top: 22%; right: 6%; animation: hf-float-a 3.8s ease-in-out infinite; }
+.hf-badge-2 { bottom: 26%; left: 5%; animation: hf-float-b 4.2s ease-in-out infinite; }
+@keyframes hf-float-a {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes hf-float-b {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(8px); }
+}
+.hf-pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e; flex-shrink: 0;
+  animation: hf-pulse-ring 2.4s ease-in-out infinite;
+}
+@keyframes hf-pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+.hf-badge-text { display: flex; flex-direction: column; gap: 1px; }
+.hf-badge-val { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; letter-spacing: -0.02em; line-height: 1; }
+.hf-badge-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+/* ---- Animated mini bar chart inside badge ---- */
+.hf-bars { display: flex; align-items: flex-end; gap: 3px; height: 28px; }
+.hf-bar {
+  width: 6px; border-radius: 2px 2px 0 0;
+  background: var(--border-hover);
+  animation: hf-bar-rise 0.7s ease backwards;
+  transform-origin: bottom;
+}
+.hf-bar.hi { background: rgba(251,191,36,0.85); }
+.hf-bar:nth-child(1) { height: 40%; animation-delay: 0.05s; }
+.hf-bar:nth-child(2) { height: 65%; animation-delay: 0.10s; }
+.hf-bar:nth-child(3) { height: 50%; animation-delay: 0.15s; }
+.hf-bar:nth-child(4) { height: 80%; animation-delay: 0.20s; }
+.hf-bar:nth-child(5) { height: 55%; animation-delay: 0.25s; }
+.hf-bar:nth-child(6) { height: 95%; animation-delay: 0.30s; }
+.hf-bar:nth-child(7) { height: 70%; animation-delay: 0.35s; }
+@keyframes hf-bar-rise {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+/* Additional floating badge positions */
+.hf-badge-3 { top: 58%; right: 4%; animation: hf-float-c 4.6s ease-in-out infinite; }
+.hf-badge-4 { top: 12%; left: 4%; animation: hf-float-d 3.4s ease-in-out infinite; }
+@keyframes hf-float-c {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-7px) translateX(3px); }
+  66% { transform: translateY(5px) translateX(-2px); }
+}
+@keyframes hf-float-d {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+/* Mini icon in badge */
+.hf-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hf-icon svg { width: 14px; height: 14px; }
+.hf-icon.red   { background: rgba(220,38,38,0.15); color: rgba(220,38,38,0.9); }
+.hf-icon.pink  { background: rgba(193,53,132,0.15); color: rgba(193,53,132,0.9); }
+.hf-icon.cyan  { background: rgba(37,244,238,0.15); color: rgba(37,244,238,0.9); }
+.hf-icon.amber { background: rgba(251,191,36,0.15); color: rgba(251,191,36,0.9); }
+/* Sparkline inside badge */
+.hf-sparkline { display: flex; align-items: flex-end; gap: 2px; height: 22px; }
+.hf-spark { width: 4px; border-radius: 1px 1px 0 0; background: var(--border); }
+.hf-spark.up { background: #22c55e; }
+/* Hero dot grid overlay */
+.hero-dotgrid {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(circle, rgba(120,120,120,0.13) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+}
+[data-theme="dark"] .hero-dotgrid { background-image: radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px); }
+/* hide floating badges on narrow screens */
+@media (max-width: 900px) { .hf-badge { display: none; } .hero-glow, .hero-glow-2 { opacity: 0.6; } .hero-dotgrid { display: none; } }
+
+/* ---- Inline brand logo marks ---- */
+.brand-inline-img {
+  display: inline-block;
+  height: 0.95em;
+  width: auto;
+  vertical-align: middle;
+  position: relative;
+  top: -0.06em;
+  margin: 0 2px;
+}
+.brand-netflix-img {
+  height: 1.65em;
+  top: -0.13em;
+}
+.brand-a24-img {
+  filter: brightness(0);
+  height: 0.95em;
+  top: -0.06em;
+}
+[data-theme="dark"] .brand-a24-img { filter: brightness(0) invert(1); }
+
+/* ---- Card Visual Header ---- */
+.cvh {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 16px 22px 14px;
+  margin: -28px -28px 18px;
+  border-radius: 12px 12px 0 0;
+  position: relative; overflow: hidden;
+}
+.cvh::after {
+  content: ''; position: absolute; inset: 0;
+  background: inherit;
+  opacity: 0.07; pointer-events: none;
+}
+.cvh-left { display: flex; flex-direction: column; gap: 2px; }
+.cvh-big {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 2rem; letter-spacing: -0.04em; line-height: 1;
+}
+.cvh-sub {
+  font-size: 0.58rem; text-transform: uppercase;
+  letter-spacing: 0.09em; font-weight: 600; opacity: 0.75;
+}
+.cvh-sparkbars { display: flex; align-items: flex-end; gap: 3px; height: 36px; padding-bottom: 2px; }
+.cvh-spark { width: 7px; border-radius: 2px 2px 0 0; opacity: 0.6; flex-shrink: 0; }
+.cvh-spark.full { opacity: 1; }
+/* per-card colors */
+.cvh-squid    { background: linear-gradient(160deg, rgba(220,38,38,0.10) 0%, transparent 80%); color: #c53030; border-bottom: 1px solid rgba(220,38,38,0.14); }
+.cvh-squid .cvh-spark { background: rgba(220,38,38,0.35); }
+.cvh-squid .cvh-spark.full { background: #c53030; }
+.cvh-instagram { background: linear-gradient(160deg, rgba(236,72,153,0.10) 0%, transparent 80%); color: #be185d; border-bottom: 1px solid rgba(236,72,153,0.14); }
+.cvh-instagram .cvh-spark { background: rgba(236,72,153,0.35); }
+.cvh-instagram .cvh-spark.full { background: #be185d; }
+.cvh-tiktok   { background: linear-gradient(160deg, rgba(59,130,246,0.10) 0%, transparent 80%); color: #1d4ed8; border-bottom: 1px solid rgba(59,130,246,0.14); }
+.cvh-tiktok .cvh-spark { background: rgba(59,130,246,0.35); }
+.cvh-tiktok .cvh-spark.full { background: #1d4ed8; }
+.cvh-neon     { background: linear-gradient(160deg, rgba(139,92,246,0.10) 0%, transparent 80%); color: #6d28d9; border-bottom: 1px solid rgba(139,92,246,0.14); }
+.cvh-neon .cvh-spark { background: rgba(139,92,246,0.35); }
+.cvh-neon .cvh-spark.full { background: #6d28d9; }
+
+/* CVH context rows — client label + platform list */
+.cvh-client-row {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 4px;
+}
+.cvh-client-label {
+  font-size: 0.46rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; opacity: 0.8; white-space: nowrap;
+}
+.cvh-platform-pills {
+  display: flex; gap: 3px; align-items: center; margin-top: 2px;
+}
+.cvh-pill {
+  font-size: 0.44rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 1.5px 5px; border-radius: 3px;
+  opacity: 0.75; border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.cvh-badge-organic {
+  font-size: 0.46rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 2px 6px; border-radius: 20px;
+  background: rgba(34,197,94,0.12); color: #16a34a;
+  border: 1px solid rgba(34,197,94,0.25);
+}
+[data-theme="dark"] .cvh-badge-organic { color: #4ade80; background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.2); }
+
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: 100px;
+  font-family: var(--font-body); font-size: 0.86rem;
+  font-weight: 600; transition: all 0.35s var(--ease);
+  cursor: pointer; border: none; letter-spacing: 0.01em;
+}
+.btn-primary { background: var(--text); color: var(--bg); }
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.85; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
+.btn svg { width: 16px; height: 16px; }
+
+/* ============ PLATFORM ICON CAROUSEL ============ */
+.platform-carousel {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0; overflow: hidden;
+  background: var(--bg-alt);
+}
+.platform-carousel .section-label {
+  text-align: center; margin-bottom: 18px;
+}
+.platform-track-wrap { overflow: hidden; position: relative; }
+.platform-track-wrap::before, .platform-track-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+}
+.platform-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg-alt), transparent); }
+.platform-track-wrap::after { right: 0; background: linear-gradient(270deg, var(--bg-alt), transparent); }
+.platform-track {
+  display: flex; gap: 48px; width: max-content;
+  animation: platformScroll 40s linear infinite;
+  align-items: center;
+}
+@keyframes platformScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.platform-icon {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  flex-shrink: 0; min-width: 64px;
+}
+.platform-icon img {
+  width: 28px; height: 28px; object-fit: contain;
+  opacity: 0.85; transition: opacity 0.3s;
+}
+.platform-icon:hover img { opacity: 1; }
+/* Dark-colored brand icons need to invert in dark mode to stay visible */
+[data-theme="dark"] .platform-icon img.icon-invert { filter: brightness(0) invert(0.9); opacity: 0.9; }
+.platform-icon span {
+  font-size: 0.58rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: var(--font-display); white-space: nowrap;
+}
+
+/* ============ SECTIONS COMMON ============ */
+section { padding: 80px 48px; }
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.12; letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 0.9rem; color: var(--text-dim);
+  line-height: 1.7; max-width: 540px;
+  margin-bottom: 36px; margin-top: -4px;
+}
+.reveal {
+  opacity: 1; transform: translateY(0);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ ABOUT ============ */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; margin-top: 28px; align-items: start;
+}
+.about-text p {
+  color: var(--text-dim); font-size: 0.92rem;
+  line-height: 1.75; margin-bottom: 14px;
+}
+.about-text strong { color: var(--text); font-weight: 600; }
+.about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.highlight-card {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.highlight-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+.highlight-num {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.5rem; line-height: 1; margin-bottom: 4px;
+  letter-spacing: -0.03em;
+}
+.highlight-label { font-size: 0.68rem; color: var(--text-dim); font-weight: 400; }
+
+/* ============ WORK / CASE STUDIES - COMPACT 2x2 GRID ============ */
+.work-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 28px;
+}
+.work-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.work-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+/* glow cards handle their own hover box-shadow above */
+.work-card:not([class*="glow-"]):hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+[data-theme="dark"] .work-card:not([class*="glow-"]):hover { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.work-card.featured {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 0;
+}
+.work-card.featured .work-card-visual {
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; min-height: 220px;
+}
+.work-card.featured .work-card-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+.work-card-tag {
+  font-family: var(--font-display);
+  font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-color); margin-bottom: 10px;
+  display: inline-block; padding: 4px 10px;
+  background: rgba(154,154,154,0.1); border-radius: 100px;
+  width: fit-content;
+}
+.work-card-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.1rem; line-height: 1.25;
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.work-card.featured .work-card-title { font-size: 1.25rem; }
+.work-card-desc {
+  color: var(--text-dim); font-size: 0.82rem;
+  line-height: 1.6; margin-bottom: 16px;
+  display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.work-card-metrics {
+  display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.wm { display: flex; flex-direction: column; }
+.wm-val { font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; letter-spacing: -0.02em; }
+.wm-label { font-size: 0.58rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+.work-card-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-size: 0.74rem;
+  font-weight: 600; color: var(--accent-color);
+  cursor: pointer; background: none; border: none;
+  padding: 8px 16px; border-radius: 100px;
+  border: 1px solid rgba(154,154,154,0.25);
+  transition: all 0.3s; width: fit-content; margin-top: auto;
+}
+.work-card-btn:hover { background: rgba(154,154,154,0.08); border-color: var(--accent-color); }
+.work-card-btn svg { width: 12px; height: 12px; }
+
+/* Featured card visual backgrounds */
+.vis-realestate {
+  background: var(--bg-alt);
+  border-radius: var(--radius) 0 0 var(--radius);
+  border-right: 1px solid var(--border);
+}
+[data-theme="dark"] .vis-realestate { background: #0c0c0c; }
+.re-dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 82%; }
+.re-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+[data-theme="dark"] .re-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.07); }
+.re-card-label { font-size: 0.44rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-display); }
+.re-card-val { font-family: var(--font-display); font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; }
+.re-card-change { font-size: 0.5rem; color: rgba(34,197,94,0.85); font-weight: 500; }
+
+/* ============ EXPERIENCE TIMELINE ============ */
+.timeline { margin-top: 48px; position: relative; padding-bottom: 8px; }
+.timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border); transform: translateX(-50%); }
+.tl-item { display: flex; justify-content: flex-end; padding-right: calc(50% + 28px); padding-bottom: 32px; position: relative; }
+.tl-item:nth-child(even) { justify-content: flex-start; padding-right: 0; padding-left: calc(50% + 28px); }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::after { content: ''; position: absolute; left: calc(50% - 5px); top: 18px; width: 10px; height: 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 50%; z-index: 1; transition: border-color 0.3s; }
+.tl-item:hover::after { border-color: var(--accent-color); }
+.tl-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; width: 100%; transition: border-color 0.3s, transform 0.3s; }
+.tl-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.tl-badge { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.tl-badge-logo { width: 28px; height: 28px; object-fit: contain; opacity: 0.9; flex-shrink: 0; }
+[data-theme="dark"] .tl-badge-logo.icon-invert { filter: brightness(0) invert(0.9); opacity: 0.9; }
+.tl-co-logo { height: 24px; width: auto; object-fit: contain; flex-shrink: 0; }
+.lane-logo-dark { display: none; }
+.lane-logo-light { display: block; }
+[data-theme="dark"] .lane-logo-dark { display: block; }
+[data-theme="dark"] .lane-logo-light { display: none; }
+.tl-company { font-size: 0.78rem; color: var(--accent-color); font-weight: 500; }
+.tl-role { font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; line-height: 1.3; letter-spacing: -0.02em; }
+.tl-date { font-size: 0.66rem; color: var(--text-dim); letter-spacing: 0.04em; margin-top: 3px; text-transform: uppercase; }
+.tl-desc { font-size: 0.81rem; color: var(--text-dim); line-height: 1.65; margin-top: 8px; }
+@media (max-width: 680px) {
+  .timeline::before { left: 8px; transform: none; }
+  .tl-item, .tl-item:nth-child(even) { justify-content: flex-start; padding-left: 32px; padding-right: 0; }
+  .tl-item::after { left: 3px; top: 16px; }
+}
+
+/* ============ BRAND CALLOUT ============ */
+.brand-callout {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 40px;
+  display: grid; grid-template-columns: auto 1fr; gap: 36px;
+  align-items: center; margin-top: 60px;
+}
+.brand-logo-area { display: flex; align-items: center; }
+.brand-co-logo { height: 52px; width: auto; object-fit: contain; }
+.brand-desc { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; }
+.brand-desc strong { color: var(--text); font-weight: 600; }
+
+/* ============ CERTIFICATIONS & TOOLS ============ */
+/* Certs section: degree card + cert grid side by side */
+.certs-layout { display: grid; grid-template-columns: 1fr 1.65fr; gap: 8px; margin-top: 24px; align-items: start; }
+@media (max-width: 760px) { .certs-layout { grid-template-columns: 1fr; } }
+
+/* Featured degree card */
+.cert-degree {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 26px 24px;
+  display: flex; flex-direction: column; height: 100%;
+  transition: border-color 0.3s;
+}
+.cert-degree:hover { border-color: var(--border-hover); }
+.cert-degree-icon {
+  height: 48px; border-radius: 10px;
+  display: flex; align-items: center;
+  margin-bottom: 18px; flex-shrink: 0;
+}
+.cert-degree-icon img { height: 100%; width: auto; object-fit: contain; display: block; }
+.cert-degree-icon svg { width: 20px; height: 20px; stroke: var(--accent-color); }
+/* Logo light/dark switching */
+.logo-light-only { display: block; }
+.logo-dark-only  { display: none !important; }
+[data-theme="dark"] .logo-light-only { display: none !important; }
+[data-theme="dark"] .logo-dark-only  { display: block; }
+/* Mini logos in timeline */
+.tl-mini-logo { height: 28px; width: auto; object-fit: contain; flex-shrink: 0; display: block; }
+.cert-degree-school {
+  font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent-color);
+  margin-bottom: 7px; font-family: var(--font-display);
+}
+.cert-degree-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.15rem; letter-spacing: -0.025em; line-height: 1.25;
+  margin-bottom: 4px;
+}
+.cert-degree-date { font-size: 0.68rem; color: var(--text-dim); margin-bottom: 18px; }
+.cert-degree-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 16px; }
+.cert-degree-bullets { display: flex; flex-direction: column; gap: 9px; }
+.cert-degree-bullet {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 0.78rem; color: var(--text-dim); line-height: 1.45;
+}
+.cert-degree-bullet::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-color); flex-shrink: 0; margin-top: 5px; opacity: 0.7;
+}
+
+/* Regular cert items */
+.certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.cert-item { padding: 14px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-alt); transition: border-color 0.3s, transform 0.3s; }
+.cert-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.cert-name { font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; margin-bottom: 2px; letter-spacing: -0.01em; }
+.cert-issuer { font-size: 0.68rem; color: var(--text-dim); }
+.tools-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.tool-tag {
+  padding: 10px 14px 10px;
+  font-size: 0.68rem; font-weight: 500;
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--bg-alt); transition: all 0.3s;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; min-width: 80px; text-align: center;
+  letter-spacing: 0.01em;
+}
+.tool-tag .tool-icon { width: 20px; height: 20px; object-fit: contain; transition: opacity 0.3s; }
+.tool-tag:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+[data-theme="dark"] .tool-tag .tool-icon.icon-invert { filter: brightness(0) invert(0.9); }
+
+/* ============ SKILLS ============ */
+.skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.skill-tag {
+  padding: 7px 14px;
+  font-size: 0.72rem; font-weight: 500;
+  border: 1px solid var(--border); border-radius: 20px;
+  background: var(--bg-alt); color: var(--text);
+  letter-spacing: 0.01em; transition: border-color 0.25s, transform 0.25s;
+  white-space: nowrap;
+}
+.skill-tag:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+.skill-tag.featured { border-color: var(--accent-color); color: var(--accent-color); }
+/* ── Skill tag tooltips ── */
+.skill-tag { position: relative; }
+.skill-tag[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 0.67rem;
+  line-height: 1.55;
+  white-space: normal;
+  width: 220px;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s, transform 0.18s;
+  z-index: 100;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+[data-theme="dark"] .skill-tag[data-tooltip]::after {
+  background: #2a2a2a;
+  color: #e8e8e8;
+  border-color: rgba(255,255,255,0.1);
+}
+.skill-tag[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ============ CONTACT ============ */
+.contact-section { text-align: center; padding: 100px 48px; overflow: visible; }
+#contact {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.contact-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -0.04em; margin-bottom: 0;
+  text-align: center; width: 100%;
+}
+.contact-title em { font-style: italic; color: var(--text-dim); }
+.contact-word {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -0.04em;
+  text-align: center; width: 100%;
+  display: flex; justify-content: center; align-items: center;
+  height: 1.15em; overflow: visible;
+}
+.contact-sub { font-size: 0.95rem; color: var(--text-dim); max-width: 420px; margin: 0 auto 32px; line-height: 1.65; text-align: center; }
+.contact-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 100px;
+  font-size: 0.8rem; font-weight: 500;
+  border: 1px solid var(--border); transition: all 0.35s var(--ease);
+}
+.contact-link:hover { border-color: var(--text); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+.contact-link svg { width: 14px; height: 14px; }
+.contact-link-cta {
+  background: var(--text); color: var(--bg);
+  border-color: var(--text); font-weight: 700;
+  box-shadow: 0 0 12px 4px rgba(0,0,0,0.35), 0 0 28px 8px rgba(0,0,0,0.18);
+}
+.contact-link-cta:hover {
+  background: var(--text-dim); color: var(--bg);
+  border-color: var(--text-dim); transform: translateY(-3px);
+  box-shadow: 0 0 16px 6px rgba(0,0,0,0.45), 0 0 36px 12px rgba(0,0,0,0.22);
+}
+[data-theme="dark"] .contact-link-cta {
+  background: var(--text); color: var(--bg); border-color: var(--text);
+  box-shadow: 0 0 12px 4px rgba(255,255,255,0.30), 0 0 28px 8px rgba(255,255,255,0.14);
+}
+[data-theme="dark"] .contact-link-cta:hover {
+  background: var(--text-dim); color: var(--bg); border-color: var(--text-dim);
+  box-shadow: 0 0 16px 6px rgba(255,255,255,0.40), 0 0 36px 12px rgba(255,255,255,0.18);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 24px 48px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  font-size: 0.7rem; color: var(--text-dim);
+}
+footer > span:first-child { justify-self: start; }
+footer > span:last-child { justify-self: end; }
+.footer-substack {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--text-dim); text-decoration: none;
+  transition: color 0.25s; justify-self: center;
+}
+.footer-legal-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-sans); font-size: 0.7rem;
+  color: var(--text-dim); padding: 0; transition: color 0.2s;
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent;
+}
+.footer-legal-btn:hover { color: var(--accent-color); text-decoration-color: var(--accent-color); }
+.footer-substack:hover { color: var(--text); }
+.footer-substack svg { width: 14px; height: 14px; }
+
+/* ============ LEGAL BODY ============ */
+.legal-body {
+  font-size: 0.72rem; line-height: 1.7; color: var(--text-dim);
+}
+.legal-body p { margin-bottom: 14px; }
+.legal-heading { font-weight: 600; color: var(--text-dim); }
+
+/* ============ MODAL ============ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s var(--ease), visibility 0.35s;
+  padding: 24px;
+}
+[data-theme="dark"] .modal-overlay { background: rgba(0,0,0,0.7); }
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal-overlay.open .modal-content { transform: translateY(0); }
+.modal-content {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 900px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 48px;
+  transform: translateY(20px);
+  transition: transform 0.4s var(--ease);
+}
+.modal-close {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-size: 0.74rem;
+  font-weight: 600; color: var(--text-dim);
+  cursor: pointer; background: none; border: none;
+  margin-bottom: 28px; transition: color 0.3s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-close svg { width: 14px; height: 14px; }
+.modal-tag {
+  font-family: var(--font-display); font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-color); margin-bottom: 12px;
+  display: inline-block; padding: 4px 10px;
+  background: rgba(154,154,154,0.1); border-radius: 100px;
+}
+.modal-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  line-height: 1.1; letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+.modal-intro {
+  font-size: 0.95rem; color: var(--text-dim);
+  line-height: 1.75; margin-bottom: 28px;
+}
+.modal-stats-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px; margin-bottom: 36px;
+}
+.modal-stat {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; text-align: center;
+}
+.modal-stat-val {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.15rem; letter-spacing: -0.03em; margin-bottom: 2px;
+}
+.modal-stat-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+.modal-section { margin-bottom: 28px; }
+.modal-section h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.05rem; letter-spacing: -0.02em;
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-section p, .modal-section li {
+  color: var(--text-dim); font-size: 0.86rem;
+  line-height: 1.75; margin-bottom: 10px;
+}
+.modal-section strong { color: var(--text); font-weight: 600; }
+.modal-section ul { list-style: none; padding: 0; }
+.modal-section li { padding-left: 18px; position: relative; }
+.modal-section li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-color);
+}
+.modal-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.modal-detail-card {
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px;
+}
+.modal-detail-card h4 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 0.82rem; margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.modal-detail-card p { margin-bottom: 0; font-size: 0.78rem; }
+
+/* ============ DEVICE MOCKUPS ============ */
+.device-showcase { display: flex; gap: 20px; justify-content: center; align-items: flex-end; padding: 20px 0; flex-wrap: wrap; }
+.phone-frame {
+  width: 140px; flex-shrink: 0;
+  background: #1a1a1a; border-radius: 22px; padding: 6px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.phone-frame.small { width: 110px; }
+.phone-notch { width: 48px; height: 5px; background: #000; border-radius: 3px; margin: 2px auto 4px; }
+.phone-screen { border-radius: 16px; overflow: hidden; aspect-ratio: 9/19.5; position: relative; }
+.phone-home { width: 36px; height: 4px; background: #555; border-radius: 2px; margin: 4px auto 2px; }
+
+/* Instagram profile mockup */
+.ig-screen { background: #fafafa; padding: 8px 6px; font-size: 6px; font-family: var(--font-body); color: #262626; overflow: hidden; }
+.ig-header { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.ig-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+.ig-avatar.bad { background: linear-gradient(135deg, #ccc, #999); }
+.ig-avatar.good { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743); }
+.ig-stats { display: flex; gap: 3px; text-align: center; flex: 1; }
+.ig-stat-num { font-weight: 700; font-size: 7px; display: block; }
+.ig-stat-label { font-size: 4.5px; color: #999; }
+.ig-name { font-weight: 700; font-size: 6.5px; margin-bottom: 1px; }
+.ig-bio { font-size: 5.5px; line-height: 1.3; margin-bottom: 4px; color: #555; }
+.ig-bio.good { color: #262626; }
+.ig-highlights { display: flex; gap: 4px; margin: 5px 0; }
+.ig-hl { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ddd; background: #f0f0f0; }
+.ig-hl.active { border-color: transparent; background: linear-gradient(135deg, #fdf497, #fd5949, #d6249f, #285aeb); }
+.ig-hl-label { font-size: 3.5px; text-align: center; color: #999; margin-top: 1px; }
+.ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 4px; }
+.ig-cell { aspect-ratio: 1; }
+.ig-btn-row { display: flex; gap: 3px; margin: 4px 0; }
+.ig-btn { flex: 1; background: #efefef; border-radius: 4px; text-align: center; padding: 2.5px 0; font-weight: 600; font-size: 5.5px; }
+.ig-btn.primary { background: #0095f6; color: #fff; }
+
+/* TikTok analytics mockup */
+.analytics-screen { background: #121212; padding: 8px 6px; font-size: 5px; color: #fff; overflow: hidden; }
+.an-header { font-weight: 600; font-size: 7px; margin-bottom: 4px; }
+.an-tabs { display: flex; gap: 6px; margin-bottom: 6px; font-size: 5px; }
+.an-tab { padding: 2px 5px; border-radius: 3px; color: rgba(255,255,255,0.4); }
+.an-tab.active { background: rgba(37,244,238,0.15); color: #25f4ee; font-weight: 600; }
+.an-date { font-size: 4.5px; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+.an-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+.an-metric { background: rgba(255,255,255,0.06); border-radius: 6px; padding: 5px; }
+.an-metric-label { font-size: 4px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+.an-metric-val { font-size: 11px; font-weight: 700; color: #25f4ee; line-height: 1; }
+.an-metric-change { font-size: 4px; color: #25f4ee; margin-top: 1px; }
+.an-chart { height: 28px; display: flex; align-items: flex-end; gap: 1px; padding-top: 4px; }
+.an-bar { flex: 1; background: rgba(37,244,238,0.3); border-radius: 1px 1px 0 0; min-height: 2px; }
+
+/* Neon event screen */
+.neon-screen { background: linear-gradient(180deg, #1a0033, #330066, #660099); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+.neon-text { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: #fff; text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 32px #cc00cc; line-height: 1.1; }
+.neon-sub { font-size: 6px; color: rgba(255,255,255,0.5); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.15em; }
+
+/* Ticketmaster mockup screen */
+.tm-screen { background: #fff; padding: 6px; font-size: 5px; overflow: hidden; }
+.tm-nav { background: #1F3264; color: #fff; padding: 3px 5px; font-weight: 700; font-size: 6px; border-radius: 2px; margin-bottom: 5px; }
+.tm-search { background: #f0f0f0; border-radius: 10px; padding: 3px 6px; font-size: 5px; color: #999; margin-bottom: 6px; }
+.tm-event-card { background: linear-gradient(135deg, #1a0033, #4d0099); border-radius: 6px; padding: 8px; color: #fff; text-align: center; }
+.tm-event-title { font-weight: 800; font-size: 10px; text-shadow: 0 0 6px #ff00ff; line-height: 1.1; }
+.tm-event-sub { font-size: 5px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+
+/* Story ad screen */
+.story-screen { background: linear-gradient(180deg, #2d0060, #6600cc, #9933ff); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 10px; padding-bottom: 20px; }
+.story-cta { background: #fff; color: #333; font-weight: 700; font-size: 6px; padding: 3px 12px; border-radius: 10px; }
+.story-swipe { font-size: 4px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+/* Laptop mockup */
+.laptop-frame { width: 280px; max-width: 100%; margin: 0 auto; }
+.laptop-screen-wrap { background: #1a1a1a; border-radius: 10px 10px 0 0; padding: 8px 8px 0; }
+.laptop-screen { border-radius: 4px 4px 0 0; overflow: hidden; aspect-ratio: 16/10; position: relative; }
+.laptop-base { height: 12px; background: linear-gradient(180deg, #2a2a2a, #1a1a1a); border-radius: 0 0 4px 4px; position: relative; }
+.laptop-base::after { content: ''; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: #333; border-radius: 2px; }
+
+/* SG slide content */
+.sg-slide { background: linear-gradient(135deg, #0a1628, #1a3550); padding: 16px; color: #fff; display: flex; flex-direction: column; height: 100%; }
+.sg-label { font-size: 5px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.sg-title-text { font-family: var(--font-display); font-size: 16px; font-weight: 800; line-height: 1.1; }
+.sg-subtitle { font-size: 7px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.sg-figures { display: flex; gap: 6px; margin-top: auto; justify-content: center; padding-top: 12px; }
+.sg-figure { width: 22px; border-radius: 4px 4px 0 0; }
+
+/* Before/After layout */
+.before-after-section { margin: 20px 0; }
+.ba-row { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.ba-col { text-align: center; }
+.ba-label { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.ba-label.before { color: #dc3545; }
+.ba-label.after { color: #28a745; }
+.ba-label .ba-icon { font-size: 1rem; }
+
+/* Card visual previews */
+/* Per-card accent — border-top + very subtle bg tint, no heavy bloom */
+/* Featured: gold amber */
+.work-card.featured {
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.12), 0 4px 24px rgba(0,0,0,0.06);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+.work-card.featured:hover {
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.28), 0 8px 36px rgba(0,0,0,0.1);
+  border-color: rgba(251,191,36,0.22);
+}
+/* Squid Games: red */
+.work-card.glow-squid {
+  border-top: 2px solid rgba(220,38,38,0.40);
+  background: linear-gradient(180deg, rgba(220,38,38,0.04) 0%, transparent 36%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+.work-card.glow-squid:hover {
+  border-top-color: rgba(220,38,38,0.65);
+  box-shadow: 0 8px 32px rgba(220,38,38,0.08);
+}
+/* Instagram: rose pink */
+.work-card.glow-instagram {
+  border-top: 2px solid rgba(236,72,153,0.40);
+  background: linear-gradient(180deg, rgba(236,72,153,0.04) 0%, transparent 36%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+.work-card.glow-instagram:hover {
+  border-top-color: rgba(236,72,153,0.65);
+  box-shadow: 0 8px 32px rgba(236,72,153,0.08);
+}
+/* TikTok: blue */
+.work-card.glow-tiktok {
+  border-top: 2px solid rgba(59,130,246,0.40);
+  background: linear-gradient(180deg, rgba(59,130,246,0.04) 0%, transparent 36%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+.work-card.glow-tiktok:hover {
+  border-top-color: rgba(59,130,246,0.65);
+  box-shadow: 0 8px 32px rgba(59,130,246,0.08);
+}
+/* Neon Night: violet */
+.work-card.glow-neon {
+  border-top: 2px solid rgba(139,92,246,0.40);
+  background: linear-gradient(180deg, rgba(139,92,246,0.04) 0%, transparent 36%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+.work-card.glow-neon:hover {
+  border-top-color: rgba(139,92,246,0.65);
+  box-shadow: 0 8px 32px rgba(139,92,246,0.08);
+}
+
+/* ---- Card Stats Bar ---- */
+.card-stats {
+  display: flex; align-items: stretch;
+  margin: 14px 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; flex-shrink: 0;
+}
+.cs-item {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 13px 15px; gap: 5px;
+}
+.cs-item + .cs-item { border-left: 1px solid var(--border); }
+.cs-val {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.02rem; letter-spacing: -0.02em; line-height: 1;
+}
+.cs-label {
+  font-size: 0.58rem; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500;
+}
+/* Per-card accent color on stat values */
+.glow-squid .cs-val    { color: #c53030; }
+.glow-instagram .cs-val { color: #be185d; }
+.glow-tiktok .cs-val   { color: #1d4ed8; }
+.glow-neon .cs-val     { color: #6d28d9; }
+[data-theme="dark"] .glow-squid .cs-val    { color: #f87171; }
+[data-theme="dark"] .glow-instagram .cs-val { color: #f472b6; }
+[data-theme="dark"] .glow-tiktok .cs-val   { color: #60a5fa; }
+[data-theme="dark"] .glow-neon .cs-val     { color: #a78bfa; }
+
+/* Card highlights (legacy — hidden in favor of card-stats) */
+.card-highlights { display: none; }
+.card-highlight { display: none; }
+
+.card-visual-preview {
+  height: 90px; border-radius: 10px; overflow: hidden; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  position: relative;
+}
+.cvp-squid { background: var(--surface); border: 1px solid rgba(220,38,38,0.14); }
+.cvp-instagram { background: var(--surface); border: 1px solid rgba(236,72,153,0.14); }
+.cvp-tiktok { background: var(--surface); border: 1px solid rgba(59,130,246,0.14); }
+.cvp-neon { background: var(--surface); border: 1px solid rgba(139,92,246,0.14); }
+.mini-phone {
+  width: 24px; height: 44px; background: rgba(255,255,255,0.12);
+  border-radius: 5px; border: 1.5px solid rgba(255,255,255,0.25);
+  position: relative;
+}
+.mini-phone::before { content: ''; position: absolute; top: 2px; left: 50%; transform: translateX(-50%); width: 8px; height: 1.5px; background: rgba(255,255,255,0.2); border-radius: 1px; }
+.mini-phone::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 6px; height: 1.5px; background: rgba(255,255,255,0.15); border-radius: 1px; }
+.mini-laptop {
+  width: 48px; height: 32px; position: relative;
+}
+.mini-laptop-screen { width: 100%; height: 24px; background: rgba(255,255,255,0.12); border-radius: 2px 2px 0 0; border: 1.5px solid rgba(255,255,255,0.25); }
+.mini-laptop-base { width: 115%; height: 4px; background: rgba(255,255,255,0.15); border-radius: 0 0 2px 2px; margin-left: -7.5%; margin-top: -1px; }
+.cvp-label { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 0.55rem; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.cvp-tiktok .mini-phone { border-color: rgba(37,244,238,0.4); background: rgba(37,244,238,0.08); }
+.cvp-tiktok .mini-phone::before, .cvp-tiktok .mini-phone::after { background: rgba(37,244,238,0.3); }
+.cvp-neon .neon-glow { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,0,255,0.2); filter: blur(10px); }
+
+/* Modal visual showcase box */
+.modal-visual { margin: 28px 0; padding: 32px 0; position: relative; overflow: visible; }
+.modal-visual-label { font-family: var(--font-display); font-weight: 600; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 16px; }
+
+/* Device frame caption */
+.device-caption { font-size: 0.65rem; color: var(--text-muted); text-align: center; margin-top: 6px; font-weight: 500; }
+
+/* PDF view button */
+.pdf-view-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 12px; padding: 14px 28px; background: var(--accent); color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; border-radius: 10px; text-decoration: none; transition: all 0.25s ease; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.pdf-view-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); filter: brightness(1.08); }
+.pdf-view-btn svg { flex-shrink: 0; }
+
+/* Image showcase for real PNG screenshots */
+.img-showcase { display: flex; gap: 0; justify-content: center; align-items: flex-end; padding: 28px 0; }
+.img-showcase img { width: 100%; border-radius: 0; box-shadow: none; transition: transform 0.3s ease, z-index 0s; background: transparent; position: relative; }
+.img-showcase img:hover { transform: scale(1.06); z-index: 2; }
+.img-showcase.phones img { max-width: 520px; margin: 0 -60px; }
+.img-showcase.laptops img { max-width: 480px; margin: 0 -20px; }
+.img-showcase-label { font-family: var(--font-display); font-weight: 600; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; width: 100%; margin-bottom: 8px; }
+.img-showcase-caption { font-size: 0.75rem; color: var(--text-muted); text-align: center; width: 100%; margin-top: 8px; }
+[data-theme="dark"] .img-showcase img { box-shadow: none; }
+@media (max-width: 900px) {
+  .img-showcase.phones img { max-width: 380px; margin: 0 -40px; }
+  .img-showcase.laptops img { max-width: 380px; }
+}
+@media (max-width: 700px) {
+  .img-showcase { flex-direction: column; align-items: center; gap: 16px; }
+  .img-showcase.phones img { max-width: 85%; margin: 0; }
+  .img-showcase.laptops img { max-width: 95%; margin: 0; }
+  .img-showcase img:hover { transform: scale(1.02); }
+}
+
+/* Dark mode device adjustments */
+[data-theme="dark"] .phone-frame { background: #2a2a2a; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+[data-theme="dark"] .laptop-screen-wrap { background: #2a2a2a; }
+[data-theme="dark"] .laptop-base { background: linear-gradient(180deg, #3a3a3a, #2a2a2a); }
+[data-theme="dark"] .ig-screen { background: #000; color: #e0e0e0; }
+[data-theme="dark"] .ig-stat-label { color: #555; }
+[data-theme="dark"] .ig-bio { color: #888; }
+[data-theme="dark"] .ig-bio.good { color: #e0e0e0; }
+[data-theme="dark"] .ig-hl { border-color: #333; background: #1a1a1a; }
+[data-theme="dark"] .ig-btn { background: #262626; color: #e0e0e0; }
+[data-theme="dark"] .tm-screen { background: #1a1a1a; color: #e0e0e0; }
+[data-theme="dark"] .tm-search { background: #262626; }
+
+/* ---- Split Card Layout (two-column: visual left / text right) ---- */
+.work-card.split {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 0;
+  padding: 0;
+}
+.card-left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  border-right: 1px solid var(--border);
+  gap: 3px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.card-left-panel .cvh-client-label {
+  font-size: 0.44rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  opacity: 0.65; margin-bottom: 4px;
+  display: block; white-space: normal;
+  word-break: break-word;
+}
+.card-left-panel .cvh-big { font-size: 1.7rem; }
+.card-left-panel .cvh-sub { font-size: 0.54rem; }
+.card-left-panel .cvh-platform-pills { margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+.card-left-panel .cvh-sparkbars { margin-top: 10px; }
+.work-card.split .work-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* Left panel per-card accent colors */
+.clp-squid {
+  background: linear-gradient(160deg, rgba(220,38,38,0.13) 0%, rgba(220,38,38,0.04) 100%);
+  color: #c53030;
+}
+.clp-squid .cvh-spark { background: rgba(220,38,38,0.30); }
+.clp-squid .cvh-spark.full { background: #c53030; }
+.clp-instagram {
+  background: linear-gradient(160deg, rgba(236,72,153,0.13) 0%, rgba(236,72,153,0.04) 100%);
+  color: #be185d;
+}
+.clp-instagram .cvh-spark { background: rgba(236,72,153,0.30); }
+.clp-instagram .cvh-spark.full { background: #be185d; }
+.clp-tiktok {
+  background: linear-gradient(160deg, rgba(59,130,246,0.13) 0%, rgba(59,130,246,0.04) 100%);
+  color: #1d4ed8;
+}
+.clp-tiktok .cvh-spark { background: rgba(59,130,246,0.30); }
+.clp-tiktok .cvh-spark.full { background: #1d4ed8; }
+.clp-neon {
+  background: linear-gradient(160deg, rgba(139,92,246,0.13) 0%, rgba(139,92,246,0.04) 100%);
+  color: #6d28d9;
+}
+.clp-neon .cvh-spark { background: rgba(139,92,246,0.30); }
+.clp-neon .cvh-spark.full { background: #6d28d9; }
+/* Dark mode panel overrides */
+[data-theme="dark"] .clp-squid {
+  background: linear-gradient(160deg, rgba(220,38,38,0.20) 0%, rgba(220,38,38,0.07) 100%);
+  color: #f87171;
+}
+[data-theme="dark"] .clp-squid .cvh-spark.full { background: #f87171; }
+[data-theme="dark"] .clp-instagram {
+  background: linear-gradient(160deg, rgba(236,72,153,0.20) 0%, rgba(236,72,153,0.07) 100%);
+  color: #f472b6;
+}
+[data-theme="dark"] .clp-instagram .cvh-spark.full { background: #f472b6; }
+[data-theme="dark"] .clp-tiktok {
+  background: linear-gradient(160deg, rgba(59,130,246,0.20) 0%, rgba(59,130,246,0.07) 100%);
+  color: #60a5fa;
+}
+[data-theme="dark"] .clp-tiktok .cvh-spark.full { background: #60a5fa; }
+[data-theme="dark"] .clp-neon {
+  background: linear-gradient(160deg, rgba(139,92,246,0.20) 0%, rgba(139,92,246,0.07) 100%);
+  color: #a78bfa;
+}
+[data-theme="dark"] .clp-neon .cvh-spark.full { background: #a78bfa; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  section, .hero { padding-left: 24px; padding-right: 24px; }
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .work-card.featured { grid-template-columns: 1fr; }
+  .work-card.featured .work-card-visual { min-height: 160px; border-radius: var(--radius) var(--radius) 0 0; }
+  .vis-realestate { border-radius: var(--radius) var(--radius) 0 0; }
+  .brand-callout { grid-template-columns: 1fr; padding: 24px; }
+  .contact-section { padding: 64px 24px; }
+  footer { grid-template-columns: 1fr; gap: 8px; text-align: center; padding: 18px; }
+  footer > span:first-child, footer > span:last-child { justify-self: center; }
+  .modal-content { padding: 28px; }
+  .modal-grid-2 { grid-template-columns: 1fr; }
+  .device-showcase { gap: 12px; }
+  .phone-frame { width: 120px; }
+  .phone-frame.small { width: 95px; }
+  .laptop-frame { width: 240px; }
+  .ba-row { gap: 16px; }
+  /* Split cards go single column on tablet */
+  .work-card.split { grid-template-columns: 1fr; }
+  .card-left-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+    min-height: auto;
+    padding: 20px 24px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px 20px;
+  }
+  .card-left-panel .cvh-client-label { width: 100%; text-align: center; margin-bottom: 2px; }
+  .card-left-panel .cvh-big { font-size: 1.8rem; }
+  .card-left-panel .cvh-sub { font-size: 0.6rem; margin-left: 4px; }
+  .card-left-panel .cvh-platform-pills { margin-top: 0; }
+  .card-left-panel .cvh-sparkbars { margin-top: 0; height: 30px; }
+  .card-left-panel .cvh-badge-organic { margin-top: 0 !important; }
+  .work-card.split .work-card-body { padding: 20px; }
+}
+@media (max-width: 550px) {
+  .hero { padding-top: 120px; }
+  .hero h1 { font-size: clamp(2.4rem, 10vw, 3rem); }
+  .hero-word-wrap { width: 100%; }
+  .hero-ctas { flex-direction: column; width: 100%; }
+  .btn { width: 100%; justify-content: center; }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card { padding: 20px; }
+  .about-highlights { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .modal-stats-row { grid-template-columns: 1fr 1fr; }
+  .phone-frame { width: 100px; }
+  .phone-frame.small { width: 80px; }
+  .laptop-frame { width: 200px; }
+  .neon-text { font-size: 16px; }
+  .card-left-panel {
+    padding: 16px 20px;
+    gap: 4px 14px;
+  }
+  .card-left-panel .cvh-client-label { font-size: 0.42rem; }
+  .card-left-panel .cvh-big { font-size: 1.5rem; }
+  .card-left-panel .cvh-sub { font-size: 0.52rem; }
+  .card-left-panel .cvh-sparkbars { height: 26px; }
+  .card-left-panel .cvh-spark { width: 6px; }
+  .card-left-panel .cvh-platform-pills { flex-wrap: wrap; justify-content: center; }
+  .work-card.split .work-card-body { padding: 16px; }
+  /* Contact section */
+  .contact-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .contact-word-wrap { font-size: clamp(1.6rem, 7vw, 2.4rem); height: 1.4em; }
+  .contact-sub { font-size: 0.85rem; max-width: 320px; }
+  .contact-links { gap: 8px; }
+  .contact-link { padding: 9px 16px; font-size: 0.72rem; }
+  /* Timeline */
+  .tl-card { padding: 14px 16px; }
+  .tl-role { font-size: 0.84rem; }
+  .tl-desc { font-size: 0.76rem; }
+  .tl-highlights { gap: 4px; }
+  .tl-pill { font-size: 0.52rem; padding: 3px 7px; }
+  .sg-title-text { font-size: 12px; }
+  .ba-row { gap: 10px; }
+}
+
+
+/* ---- Timeline "Learn More" Button ---- */
+.tl-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-display); font-size: 0.68rem;
+  font-weight: 600; color: var(--accent-color);
+  cursor: pointer; background: none;
+  padding: 6px 12px; border-radius: 100px;
+  border: 1px solid rgba(154,154,154,0.25);
+  transition: all 0.3s; margin-top: 12px;
+}
+.tl-btn:hover { background: rgba(154,154,154,0.08); border-color: var(--accent-color); }
+.tl-btn svg { width: 10px; height: 10px; }
+
+/* ---- Timeline Highlight Pills ---- */
+.tl-highlights { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tl-pill {
+  font-size: 0.58rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.07em; padding: 3px 8px; border-radius: 4px;
+  background: rgba(154,154,154,0.08); color: var(--text-dim);
+  border: 1px solid var(--border); white-space: nowrap;
+}
+.tl-pill.netflix { background: rgba(229,9,20,0.08); color: #e50914; border-color: rgba(229,9,20,0.2); }
+[data-theme="dark"] .tl-pill.netflix { color: #ff4d57; background: rgba(229,9,20,0.12); border-color: rgba(229,9,20,0.25); }
+
+/* ---- Timeline external link button ---- */
+.tl-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.tl-actions .tl-btn { margin-top: 0; }
+.tl-ext-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-display); font-size: 0.68rem;
+  font-weight: 600; color: var(--text-dim);
+  text-decoration: none;
+  padding: 6px 12px; border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.tl-ext-link:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-1px); }
+.tl-ext-link svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+/* ---- Contact section rotating word (mirrors hero pattern) ---- */
+.contact-word-wrap {
+  display: block; position: relative;
+  height: 1.3em; overflow: hidden;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+.contact-word {
+  position: absolute; left: 0; right: 0; text-align: center;
+  opacity: 0;
+  color: var(--text-dim); font-style: italic; font-weight: 700;
+  white-space: nowrap;
+}
+.contact-word.active { opacity: 1; animation: wordIn 0.5s var(--ease) forwards; }
+.contact-word.exit { opacity: 0; animation: wordOut 0.35s var(--ease) forwards; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">nathan<span>lane.</span></div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certs">Skills</a></li>
+    </ul>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+      <div class="toggle-thumb">
+        <svg viewBox="0 0 24 24" class="sun-icon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg viewBox="0 0 24 24" class="moon-icon" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <div class="toggle-icon-inactive">
+        <svg viewBox="0 0 24 24" class="moon-hint"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg viewBox="0 0 24 24" class="sun-hint" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
+      </div>
+    </div>
+    <a href="#contact" class="nav-cta">Let's Talk <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#work" onclick="closeMobile()">Work</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#certs" onclick="closeMobile()">Skills</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <a href="https://pensight.com/x/itsnathanlane/60minconsultation" target="_blank" class="hero-tag"><span class="dot"></span> Book a Call</a>
+  <h1>
+    Social strategy<br>built for<br>
+    <span class="hero-word-wrap" id="heroWords">
+      <span class="hero-word active">entertainment</span>
+      <span class="hero-word">growth</span>
+      <span class="hero-word">culture</span>
+      <span class="hero-word">results</span>
+      <span class="hero-word">creators</span>
+    </span>
+  </h1>
+  <p class="hero-sub">Entertainment marketing and social media strategist who builds engaged audiences from scratch — with hands-on experience alongside brands like <img src="images/netflix-name-logo-png-clip-art.png" alt="Netflix" class="brand-inline-img brand-netflix-img">, <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/A24_logo.svg" alt="A24" class="brand-inline-img brand-a24-img">, and more.</p>
+  <div class="hero-ctas">
+    <a href="#work" class="btn btn-primary">View My Work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+</section>
+
+<!-- PLATFORM ICON CAROUSEL -->
+<div class="platform-carousel">
+  <div class="section-label" style="text-align:center;margin-bottom:14px;">Platforms I Work With</div>
+  <div class="platform-track-wrap">
+    <div class="platform-track" id="platformTrack">
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook"><span>Facebook</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"><span>Instagram</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" class="icon-invert"><span>TikTok</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"><span>YouTube</span></div>
+      <div class="platform-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230A66C2'%3E%3Cpath d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E" alt="LinkedIn"><span>LinkedIn</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/x" alt="X / Twitter" class="icon-invert"><span>X / Twitter</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/threads" alt="Threads" class="icon-invert"><span>Threads</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest"><span>Pinterest</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat"><span>Snapchat</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky"><span>Bluesky</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/spotify" alt="Spotify"><span>Spotify</span></div>
+      <div class="platform-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A8E1'%3E%3Cpath d='M4.029 21.3c-.07.05-.16.07-.25.03C1.29 19.38.25 16.1.25 13.36c0-3.93 2.13-7.46 5.53-9.16.16-.07.35 0 .42.16.07.16 0 .35-.16.42-3.12 1.56-5.07 4.79-5.07 8.41 0 2.49.94 5.54 3.3 7.38.14.11.16.32.05.46-.02.03-.18.21-.28.27zM12 4.54c-2.94 0-5.7 1.4-7.46 3.79-.1.14-.07.33.06.43.14.1.33.07.43-.06C6.67 6.46 9.23 5.17 12 5.17s5.33 1.29 6.97 3.53c.1.14.3.16.43.06.14-.1.16-.3.06-.43C17.7 5.94 14.94 4.54 12 4.54zM12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22.54C6.18 22.54 1.46 17.82 1.46 12S6.18 1.46 12 1.46 22.54 6.18 22.54 12 17.82 22.54 12 22.54zm3.5-10.91L12 9.77l-3.5 1.86v3.74L12 17.23l3.5-1.86v-3.74z'/%3E%3C/svg%3E" alt="Amazon Music"><span>Amazon Music</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/apple" alt="Apple Music" class="icon-invert"><span>Apple Music</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/applepodcasts" alt="Apple Podcasts"><span>Apple Podcasts</span></div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook"><span>Facebook</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"><span>Instagram</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" class="icon-invert"><span>TikTok</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"><span>YouTube</span></div>
+      <div class="platform-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230A66C2'%3E%3Cpath d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E" alt="LinkedIn"><span>LinkedIn</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/x" alt="X / Twitter" class="icon-invert"><span>X / Twitter</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/threads" alt="Threads" class="icon-invert"><span>Threads</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest"><span>Pinterest</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat"><span>Snapchat</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky"><span>Bluesky</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/spotify" alt="Spotify"><span>Spotify</span></div>
+      <div class="platform-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A8E1'%3E%3Cpath d='M4.029 21.3c-.07.05-.16.07-.25.03C1.29 19.38.25 16.1.25 13.36c0-3.93 2.13-7.46 5.53-9.16.16-.07.35 0 .42.16.07.16 0 .35-.16.42-3.12 1.56-5.07 4.79-5.07 8.41 0 2.49.94 5.54 3.3 7.38.14.11.16.32.05.46-.02.03-.18.21-.28.27zM12 4.54c-2.94 0-5.7 1.4-7.46 3.79-.1.14-.07.33.06.43.14.1.33.07.43-.06C6.67 6.46 9.23 5.17 12 5.17s5.33 1.29 6.97 3.53c.1.14.3.16.43.06.14-.1.16-.3.06-.43C17.7 5.94 14.94 4.54 12 4.54zM12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22.54C6.18 22.54 1.46 17.82 1.46 12S6.18 1.46 12 1.46 22.54 6.18 22.54 12 17.82 22.54 12 22.54zm3.5-10.91L12 9.77l-3.5 1.86v3.74L12 17.23l3.5-1.86v-3.74z'/%3E%3C/svg%3E" alt="Amazon Music"><span>Amazon Music</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/apple" alt="Apple Music" class="icon-invert"><span>Apple Music</span></div>
+      <div class="platform-icon"><img src="https://cdn.simpleicons.org/applepodcasts" alt="Apple Podcasts"><span>Apple Podcasts</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">About</div>
+  <h2 class="section-title reveal">The person behind<br>the screen.</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm Nathan Lane — founder of <strong>Lane Social Co.</strong> and an entertainment marketing strategist based in Las Vegas. I built this consultancy to bring real strategy to entertainment brands, creators, and businesses who are tired of content that looks busy but doesn't actually do anything.</p>
+      <p>Lane Social Co. has supported clients across Instagram growth, TikTok content systems, paid campaigns, and full-stack social strategy. Right now, I'm embedded full-time as the sole <strong>Social Media Strategist, Paid Ads Manager, and Creative Writer</strong> for a real estate training company with <strong>200,000+ followers across 8 platforms</strong> — handling everything from organic content to a $167K+ Meta Ads account.</p>
+      <p>My experience runs through the industry too: PR and social media work at <strong>The B Company</strong> (a Hilton Entertainment firm), brand activations with <strong>Netflix</strong> for Squid Game, Stranger Things, and Bridgerton, and TikTok ad creation for <strong>A24</strong>. I came up through the <strong>LA Film School</strong> (B.S. in Entertainment Business), so I understand how entertainment actually operates — not just how to post about it. Every strategy I build runs on the <strong>L.A.N.E. Framework&trade;</strong>, a step-by-step system for building a social media presence from scratch.</p>
+    </div>
+    <div class="about-highlights reveal">
+      <div class="highlight-card"><div class="highlight-num" data-count="1500000">0</div><div class="highlight-label">Monthly Views Driven</div></div>
+      <div class="highlight-card"><div class="highlight-num" data-count="1400">0</div><div class="highlight-label">% Reach Increase</div></div>
+      <div class="highlight-card"><div class="highlight-num" data-count="200000">0</div><div class="highlight-label">Followers Managed</div></div>
+      <div class="highlight-card"><div class="highlight-num" data-count="167000" data-prefix="$">0</div><div class="highlight-label">Ad Spend Managed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label reveal">Case Studies</div>
+  <h2 class="section-title reveal">What I've built.</h2>
+  <p class="section-sub reveal">Organic growth, paid campaigns, entertainment strategy, and academic IP work — every card below is a real engagement with real results.</p>
+  <div class="work-grid">
+
+    <!-- Featured: Real Estate -->
+    <div class="work-card featured reveal">
+      <div class="work-card-visual vis-realestate">
+        <div class="re-dashboard">
+          <div class="re-card"><div class="re-card-label">Monthly Views</div><div class="re-card-val">1.5M+</div><div class="re-card-change">&uarr; from ~75K</div></div>
+          <div class="re-card"><div class="re-card-label">IG Reach</div><div class="re-card-val">888K</div><div class="re-card-change">&uarr; +1,400%</div></div>
+          <div class="re-card"><div class="re-card-label">New Followers</div><div class="re-card-val">15.7K</div><div class="re-card-change">&uarr; in one month</div></div>
+          <div class="re-card"><div class="re-card-label">Viral Reel</div><div class="re-card-val">769K</div><div class="re-card-change">&uarr; impressions</div></div>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-card-tag">Featured &mdash; Client Work</div>
+        <div class="work-card-title">Top Real Estate Company<br>Full-Stack Marketing Overhaul</div>
+        <p class="work-card-desc">Sole Social Media, Paid Ads, and Creative Writer for a legacy real estate training company with 200,000+ followers across 8+ platforms. Transformed their entire digital presence in 8 weeks.</p>
+        <div class="work-card-metrics">
+          <div class="wm"><span class="wm-val">1.5M+</span><span class="wm-label">Monthly Views</span></div>
+          <div class="wm"><span class="wm-val">+1,400%</span><span class="wm-label">IG Reach</span></div>
+          <div class="wm"><span class="wm-val">$167K+</span><span class="wm-label">Ad Spend</span></div>
+        </div>
+        <button class="work-card-btn" onclick="openModal('realEstate')">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Squid Games -->
+    <div class="work-card glow-squid split reveal">
+      <div class="card-left-panel clp-squid">
+        <span class="cvh-client-label">LA Film School &mdash; Graduation Capstone</span>
+        <span class="cvh-big">4-Month</span>
+        <span class="cvh-sub">Campaign Strategy</span>
+        <div class="cvh-platform-pills">
+          <span class="cvh-pill">Instagram</span>
+          <span class="cvh-pill">TikTok</span>
+          <span class="cvh-pill">YouTube</span>
+        </div>
+        <div class="cvh-sparkbars">
+          <div class="cvh-spark" style="height:30%"></div>
+          <div class="cvh-spark" style="height:50%"></div>
+          <div class="cvh-spark" style="height:40%"></div>
+          <div class="cvh-spark full" style="height:70%"></div>
+          <div class="cvh-spark" style="height:55%"></div>
+          <div class="cvh-spark full" style="height:90%"></div>
+          <div class="cvh-spark full" style="height:100%"></div>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-card-tag">Academic Capstone Project</div>
+        <div class="work-card-title">Squid Game: The Trials<br>Social Media Strategy</div>
+        <p class="work-card-desc">Developed a full 4-month social media strategy for Netflix's Squid Game: The Trials as my capstone project at the LA Film School. Built a complete playbook across Instagram, TikTok, and YouTube, including an AR filter concept, tiered influencer playbook, and full-funnel content calendar.</p>
+        <div class="card-stats">
+          <div class="cs-item"><span class="cs-val">4-Month</span><span class="cs-label">Full Strategy</span></div>
+          <div class="cs-item"><span class="cs-val">3</span><span class="cs-label">Platforms</span></div>
+          <div class="cs-item"><span class="cs-val">Influencer</span><span class="cs-label">Playbook Incl.</span></div>
+        </div>
+        <button class="work-card-btn" onclick="openModal('squidGames')">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Instagram Optimization -->
+    <div class="work-card glow-instagram split reveal">
+      <div class="card-left-panel clp-instagram">
+        <span class="cvh-client-label">Client Work &mdash; Lane Social Co.</span>
+        <span class="cvh-big">1,079,555</span>
+        <span class="cvh-sub">Views in 30 Days</span>
+        <span class="cvh-badge-organic" style="margin-top:8px;">Zero Paid Spend</span>
+        <div class="cvh-sparkbars">
+          <div class="cvh-spark" style="height:20%"></div>
+          <div class="cvh-spark" style="height:35%"></div>
+          <div class="cvh-spark" style="height:45%"></div>
+          <div class="cvh-spark full" style="height:60%"></div>
+          <div class="cvh-spark full" style="height:75%"></div>
+          <div class="cvh-spark full" style="height:88%"></div>
+          <div class="cvh-spark full" style="height:100%"></div>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-card-tag">Organic Client Results</div>
+        <div class="work-card-title">Instagram Profile<br>Optimization</div>
+        <p class="work-card-desc">Rebuilt underperforming small business Instagram profiles from scratch — rewrote bios, overhauled content strategy, rebuilt highlights as a mini-website, and replaced generic link pages with conversion-optimized funnels. All organic, zero paid.</p>
+        <div class="card-stats">
+          <div class="cs-item"><span class="cs-val">1M+</span><span class="cs-label">Views</span></div>
+          <div class="cs-item"><span class="cs-val">137K</span><span class="cs-label">Interactions</span></div>
+          <div class="cs-item"><span class="cs-val">30 Days</span><span class="cs-label">Timeline</span></div>
+        </div>
+        <button class="work-card-btn" onclick="openModal('instagram')">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- TikTok Growth -->
+    <div class="work-card glow-tiktok split reveal">
+      <div class="card-left-panel clp-tiktok">
+        <span class="cvh-client-label">Real Estate Brand &mdash; Dormant Account</span>
+        <span class="cvh-big">12,000%+</span>
+        <span class="cvh-sub">View Growth, 30 Days</span>
+        <div class="cvh-platform-pills">
+          <span class="cvh-pill">TikTok</span>
+          <span class="cvh-pill">948K Viewers</span>
+        </div>
+        <div class="cvh-sparkbars">
+          <div class="cvh-spark" style="height:10%"></div>
+          <div class="cvh-spark" style="height:15%"></div>
+          <div class="cvh-spark" style="height:20%"></div>
+          <div class="cvh-spark" style="height:30%"></div>
+          <div class="cvh-spark full" style="height:55%"></div>
+          <div class="cvh-spark full" style="height:78%"></div>
+          <div class="cvh-spark full" style="height:100%"></div>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-card-tag">Organic Growth Case Study</div>
+        <div class="work-card-title">TikTok Content<br>Growth Engine</div>
+        <p class="work-card-desc">Took a near-dormant real estate brand TikTok from essentially zero to 948K unique viewers in 30 days. Built an AI-powered clip pipeline, rewrote hooks for native formats, implemented trend-riding systems, and unlocked the link-in-bio threshold.</p>
+        <div class="card-stats">
+          <div class="cs-item"><span class="cs-val">12,000%+</span><span class="cs-label">View Growth</span></div>
+          <div class="cs-item"><span class="cs-val">948K</span><span class="cs-label">Unique Viewers</span></div>
+          <div class="cs-item"><span class="cs-val">+715%</span><span class="cs-label">Shares</span></div>
+        </div>
+        <button class="work-card-btn" onclick="openModal('tiktok')">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Neon Night -->
+    <div class="work-card glow-neon split reveal">
+      <div class="card-left-panel clp-neon">
+        <span class="cvh-client-label">Live Event &mdash; LA Film School</span>
+        <span class="cvh-big">4-Platform</span>
+        <span class="cvh-sub">Paid Campaign</span>
+        <div class="cvh-platform-pills">
+          <span class="cvh-pill">TikTok</span>
+          <span class="cvh-pill">Snap</span>
+          <span class="cvh-pill">IG</span>
+          <span class="cvh-pill">Ticketmaster</span>
+        </div>
+        <div class="cvh-sparkbars">
+          <div class="cvh-spark full" style="height:50%"></div>
+          <div class="cvh-spark" style="height:65%"></div>
+          <div class="cvh-spark full" style="height:80%"></div>
+          <div class="cvh-spark" style="height:60%"></div>
+          <div class="cvh-spark full" style="height:90%"></div>
+          <div class="cvh-spark" style="height:70%"></div>
+          <div class="cvh-spark full" style="height:100%"></div>
+        </div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-card-tag">Live Entertainment Campaign</div>
+        <div class="work-card-title">Neon Night<br>Event Campaign</div>
+        <p class="work-card-desc">Designed the full paid campaign for a live entertainment event — TikTok ads, Snapchat placements, Instagram Stories, and a custom Ticketmaster listing, all built platform-native for a Gen Z audience. Every channel had distinct creative.</p>
+        <div class="card-stats">
+          <div class="cs-item"><span class="cs-val">4</span><span class="cs-label">Ad Platforms</span></div>
+          <div class="cs-item"><span class="cs-val">Gen Z</span><span class="cs-label">Audience</span></div>
+          <div class="cs-item"><span class="cs-val">Ticketmaster</span><span class="cs-label">Placement</span></div>
+        </div>
+        <button class="work-card-btn" onclick="openModal('neonNight')">View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">Experience</div>
+  <h2 class="section-title reveal">Where I come from.</h2>
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="images/lafilm-mini-light.png" alt="LA Film School" class="tl-mini-logo logo-light-only">
+          <img src="images/lafilm-mini-dark.jpg" alt="LA Film School" class="tl-mini-logo logo-dark-only">
+          <span class="tl-company">Los Angeles Film School</span>
+        </div>
+        <div class="tl-role">B.S. Entertainment Business</div>
+        <div class="tl-date">Jul 2020 &mdash; Jan 2024</div>
+        <div class="tl-desc">Enrolled mid-pandemic and built a foundation in the business side of entertainment — production, marketing, distribution, and the industry infrastructure that makes the creative economy run. Graduated with a degree that bridges creative instinct with real business thinking.</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <span class="tl-company">The B Company</span>
+        </div>
+        <div class="tl-role">PR &amp; Social Media Intern</div>
+        <div class="tl-date">Mar 2022 &mdash; Oct 2022</div>
+        <div class="tl-desc">Worked inside one of LA's top entertainment PR firms — a Hilton Entertainment property with a roster spanning recording artists, record labels, film entities, and non-profits. Wrote press releases, built social content strategy, managed community across client accounts, and ran media monitoring for a firm that operates at the speed of the entertainment cycle. First real hands-on look at how entertainment PR works at the agency level.</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="tl-badge-logo">
+          <span class="tl-company">Event Network &times; Netflix</span>
+        </div>
+        <div class="tl-role">Helped Launch Netflix's First Transmedia Retail Shopping Experience</div>
+        <div class="tl-date">Sep 2022 &mdash; Jan 2023</div>
+        <div class="tl-desc">Part of the team that opened Netflix's first-ever physical brand destination — a 10,000 sq ft, two-floor transmedia retail store at The Grove in Los Angeles. The space brought Netflix's biggest IPs to life through immersive activations, exclusive merchandise, and interactive photo experiences tied to Stranger Things, Bridgerton, Squid Game, and more. Co-led the floor team, managed VIP and celebrity clientele, and helped maintain the elevated experience from launch through the full run.</div>
+        <div class="tl-highlights">
+          <span class="tl-pill netflix">Netflix's First Retail Experience</span>
+          <span class="tl-pill">10,000 sq ft Flagship</span>
+          <span class="tl-pill">Transmedia Launch</span>
+          <span class="tl-pill">VIP &amp; Celebrity Events</span>
+        </div>
+        <div class="tl-actions">
+          <a href="https://www.netflix.com/tudum/articles/netflix-at-the-grove" target="_blank" class="tl-ext-link">About the Experience <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/A24_logo.svg" alt="A24" class="tl-badge-logo icon-invert">
+          <span class="tl-company">A24</span>
+        </div>
+        <div class="tl-role">TikTok Ad Creator</div>
+        <div class="tl-date">Sep 2023</div>
+        <div class="tl-desc">Created TikTok ad content for A24 — a studio whose entire identity is built on creative authenticity. The work required a genuine platform-native feel, not polished ad copy dressed up as organic. Built content that looked, felt, and performed like real TikTok, for a brand that absolutely knows the difference between the two.</div>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="tl-badge-logo">
+          <span class="tl-company">Event Network &times; Netflix</span>
+        </div>
+        <div class="tl-role">Helped Bring Squid Game to Life at Netflix's Squid Game: The Trials</div>
+        <div class="tl-date">Sep 2023 &mdash; Jan 2024</div>
+        <div class="tl-desc">Returned to the Event Network × Netflix team as Sales Lead for Squid Game: The Trials — a full-scale immersive experience that put fans inside the world of Squid Game with escalating challenges, cutting-edge tech, and a Night Market with Korean food by award-winning Chef Katianna Hong. One of Netflix's largest live activations of the year. Led the front-line team, managed the merch and ticketing operation, and handled VIP client service across a sold-out run.</div>
+        <div class="tl-highlights">
+          <span class="tl-pill netflix">One of Netflix's Largest Live Events</span>
+          <span class="tl-pill">Sold Out Every Run</span>
+          <span class="tl-pill">VIP Client Service</span>
+          <span class="tl-pill">Sales Lead</span>
+        </div>
+        <div class="tl-actions">
+          <a href="https://squidgamethetrials.com" target="_blank" class="tl-ext-link">About the Experience <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="https://cdn.simpleicons.org/instagram" alt="Instagram" class="tl-badge-logo">
+          <img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" class="tl-badge-logo icon-invert">
+          <span class="tl-company">@itsnathanlane</span>
+        </div>
+        <div class="tl-role">Entertainment Marketing Content Creator</div>
+        <div class="tl-date">2025 &mdash; Present</div>
+        <div class="tl-desc">Started creating daily short-form content breaking down the marketing strategies behind the entertainment we already love. Reverse-engineering album rollouts, streaming campaigns, film marketing, and brand strategy on TikTok and Instagram, and writing biweekly long-form analysis on The Culture Marquee on Substack.</div>
+        <div class="tl-actions">
+          <a href="https://instagram.com/itsnathanlane" target="_blank" class="tl-ext-link">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://tiktok.com/@itsnathanlane" target="_blank" class="tl-ext-link">TikTok <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+        <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-badge">
+          <img src="images/logo-dark.png" alt="Lane Social Co." class="tl-co-logo lane-logo-dark">
+          <img src="images/logo-light.png" alt="Lane Social Co." class="tl-co-logo lane-logo-light">
+        </div>
+        <div class="tl-role">Founder &amp; Social Media Strategist</div>
+        <div class="tl-date">Mar 2022 &mdash; Present</div>
+        <div class="tl-desc">Built Lane Social Co. to make social media strategy more accessible and intentional for entertainment brands, creatives, and businesses. Strategy-first consultancy delivering custom organic social plans, audience research, content systems, and campaign planning built around the L.A.N.E. Framework&trade;.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="brand-callout reveal">
+    <div class="brand-logo-area">
+      <img src="images/logo-dark.png" alt="Lane Social Co." class="brand-co-logo lane-logo-dark">
+      <img src="images/logo-light.png" alt="Lane Social Co." class="brand-co-logo lane-logo-light">
+    </div>
+    <div class="brand-desc">Lane Social Co. is my social media consultancy where I help entertainment brands and creators build strategies that drive real results. My approach is built on the <strong>L.A.N.E. Framework&trade;</strong> — a step-by-step system for building a social media presence from scratch — giving brands and creatives the strategy, structure, and content systems they need to grow consistently.</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS & TOOLS -->
+<section id="certs">
+  <div class="section-label reveal">Certifications &amp; Tools</div>
+  <h2 class="section-title reveal">What I know.</h2>
+  <div class="certs-layout reveal">
+    <!-- Degree: featured card -->
+    <div class="cert-degree">
+      <div class="cert-degree-icon">
+        <img src="images/lafilm-light.png" alt="LA Film School" class="logo-light-only">
+        <img src="images/lafilm-dark.webp" alt="LA Film School" class="logo-dark-only">
+      </div>
+      <div class="cert-degree-school">Los Angeles Film School</div>
+      <div class="cert-degree-title">B.S. Entertainment Business</div>
+      <div class="cert-degree-date">Jul 2020 &mdash; Jan 2024</div>
+      <hr class="cert-degree-divider">
+      <div class="cert-degree-bullets">
+        <div class="cert-degree-bullet">Entertainment business, production, and distribution — understanding the full industry pipeline from concept to consumer</div>
+        <div class="cert-degree-bullet">Marketing strategy, brand activation, and audience development within the entertainment industry</div>
+        <div class="cert-degree-bullet">Campaign management, media buying, and digital strategy applied to film, music, and live events</div>
+        <div class="cert-degree-bullet">Graduated bridging creative instinct with real business thinking across entertainment's entire value chain</div>
+      </div>
+    </div>
+    <!-- Regular certifications -->
+    <div class="certs-grid">
+      <div class="cert-item"><div class="cert-name">Generative AI for Digital Marketers</div><div class="cert-issuer">Los Angeles Film School</div></div>
+      <div class="cert-item"><div class="cert-name">Hootsuite Social Marketing</div><div class="cert-issuer">Hootsuite</div></div>
+      <div class="cert-item"><div class="cert-name">Social Media Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+      <div class="cert-item"><div class="cert-name">Content Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+      <div class="cert-item"><div class="cert-name">Digital Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+      <div class="cert-item"><div class="cert-name">Inbound Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+      <div class="cert-item"><div class="cert-name">Social Media Strategy</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">SEO Foundations</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">Digital Advertising</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">Influencer Marketing</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">Content Creation &amp; Repurposing</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">Public Relations &amp; Brand Development</div><div class="cert-issuer">LinkedIn Learning</div></div>
+      <div class="cert-item"><div class="cert-name">Mailchimp Essential Training</div><div class="cert-issuer">LinkedIn Learning</div></div>
+    </div>
+  </div>
+  <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-top:40px;margin-bottom:8px;letter-spacing:-0.02em;" class="reveal">Tools I Use</h3>
+  <div class="tools-grid reveal">
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/anthropic" alt="Claude AI" class="tool-icon icon-invert"><span>Claude AI</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/meta" alt="Meta Ads Manager" class="tool-icon"><span>Meta Ads Manager</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230A66C2' d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E" alt="LinkedIn Ads" class="tool-icon"><span>LinkedIn Ads</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/googleads" alt="Google Ads" class="tool-icon"><span>Google Ads</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/hubspot" alt="HubSpot" class="tool-icon"><span>HubSpot</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/googleanalytics" alt="Google Analytics" class="tool-icon"><span>Google Analytics</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/googletagmanager" alt="Google Tag Manager" class="tool-icon"><span>Tag Manager</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/meta" alt="Meta Business Suite" class="tool-icon"><span>Meta Business Suite</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok Business Center" class="tool-icon icon-invert"><span>TikTok Biz Center</span></div>
+    <div class="tool-tag"><img src="images/canva-icon.png" alt="Canva" class="tool-icon"><span>Canva</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF0000' d='M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425zM8.884 1.376H0v21.248zm15.116 0h-8.884L24 22.624Z'/%3E%3C/svg%3E" alt="Adobe Creative Suite" class="tool-icon"><span>Adobe Creative Suite</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/hootsuite" alt="Hootsuite" class="tool-icon"><span>Hootsuite</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F05537' d='M10.542 5.81c2.653-.6 5.3.487 6.775 2.54L5.591 11c.405-2.479 2.298-4.591 4.951-5.19zm6.84 9.746a6.47 6.47 0 0 1-3.919 2.634c-2.67.604-5.335-.501-6.804-2.582l11.763-2.657 1.915-.433L24 11.691a11.57 11.57 0 0 0-.305-2.333C22.205 3.04 15.76-.9 9.303.558 2.846 2.017-1.18 8.322.31 14.642c1.491 6.319 7.935 10.259 14.392 8.8 3.805-.86 6.765-3.402 8.25-6.638z'/%3E%3C/svg%3E" alt="Eventbrite" class="tool-icon"><span>Eventbrite</span></div>
+    <!-- AI Tools -->
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M22.28 9.82a5.98 5.98 0 0 0-.52-4.91 6.05 6.05 0 0 0-6.51-2.9A6.05 6.05 0 0 0 4.98 4.18a5.98 5.98 0 0 0-4 2.9 6.05 6.05 0 0 0 .74 7.1 5.98 5.98 0 0 0 .51 4.91 6.05 6.05 0 0 0 6.51 2.9A6.05 6.05 0 0 0 13.26 24a6.05 6.05 0 0 0 5.77-4.21 5.98 5.98 0 0 0 4-2.9 6.05 6.05 0 0 0-.75-7.07zM13.26 22.5a4.48 4.48 0 0 1-2.88-1.04l.14-.08 4.78-2.76a.8.8 0 0 0 .4-.68V11.3l2.02 1.17a.07.07 0 0 1 .04.05v5.58a4.5 4.5 0 0 1-4.5 4.4zm-9.66-4.12a4.47 4.47 0 0 1-.53-3.01l.14.08 4.78 2.76a.77.77 0 0 0 .78 0l5.84-3.37v2.33a.08.08 0 0 1-.03.06L9.74 19.95a4.5 4.5 0 0 1-6.14-1.57zM2.34 7.9A4.49 4.49 0 0 1 4.71 5.92V11.6a.77.77 0 0 0 .39.68l5.81 3.35-2.02 1.17a.08.08 0 0 1-.07 0L4 14.05A4.5 4.5 0 0 1 2.34 7.9zm16.6 3.86-5.83-3.36 2.01-1.17a.08.08 0 0 1 .07 0l4.83 2.79a4.5 4.5 0 0 1-.68 8.1v-5.68a.8.8 0 0 0-.4-.68zm2.01-3.02-.14-.09-4.77-2.78a.78.78 0 0 0-.79 0L9.41 9.23V6.9a.07.07 0 0 1 .03-.06l4.83-2.79a4.5 4.5 0 0 1 6.68 4.67zM8.31 12.86 6.29 11.7a.08.08 0 0 1-.04-.06V6.07a4.5 4.5 0 0 1 7.38-3.45l-.14.08-4.78 2.76a.8.8 0 0 0-.4.68zm1.1-2.37 2.6-1.5 2.6 1.5v3L12 15l-2.59-1.5z'/%3E%3C/svg%3E" alt="ChatGPT / OpenAI" class="tool-icon icon-invert"><span>ChatGPT / OpenAI</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/googlegemini" alt="Google Gemini" class="tool-icon"><span>Google Gemini</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239333EA' d='M12 2l2.4 7.3H22l-6.2 4.5 2.4 7.2L12 17l-6.2 4 2.4-7.2L2 9.3h7.6z'/%3E%3Ccircle cx='19' cy='5' r='1.5' fill='%239333EA' opacity='0.5'/%3E%3C/svg%3E" alt="Lovart.ai" class="tool-icon"><span>Lovart.ai</span></div>
+    <!-- Video Editing -->
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23000'/%3E%3Ctext x='2' y='17' font-family='Arial,sans-serif' font-weight='900' font-size='12' fill='white'%3ECC%3C/text%3E%3C/svg%3E" alt="CapCut" class="tool-icon"><span>CapCut</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5.5' fill='%231c1c1e'/%3E%3Cg transform='translate(12,12)'%3E%3Cellipse rx='7.5' ry='2.8' transform='rotate(-40)' fill='none' stroke='%23c8c8d0' stroke-width='1.7'/%3E%3Cellipse rx='7.5' ry='2.8' transform='rotate(40)' fill='none' stroke='%23c8c8d0' stroke-width='1.7'/%3E%3Ccircle r='2' fill='%23c8c8d0'/%3E%3C/g%3E%3C/svg%3E" alt="Final Cut Pro" class="tool-icon"><span>Final Cut Pro</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='10' y='2' width='4' height='11' rx='2' fill='%234338CA'/%3E%3Cpath fill='none' stroke='%234338CA' stroke-width='2' d='M7 11c0 2.76 2.24 5 5 5s5-2.24 5-5'/%3E%3Cpath stroke='%234338CA' stroke-width='2' fill='none' stroke-linecap='round' d='M12 16v3M9 19h6'/%3E%3C/svg%3E" alt="Descript" class="tool-icon"><span>Descript</span></div>
+    <!-- Business Operations -->
+    <div class="tool-tag"><img src="images/monday-200x200-logo.png" alt="Monday.com" class="tool-icon"><span>Monday.com</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/make" alt="Make.com" class="tool-icon"><span>Make.com</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Crect x='3' y='3' width='18' height='18' rx='3' stroke='%23FF6B35' stroke-width='2'/%3E%3Cpath stroke='%23FF6B35' stroke-width='2' stroke-linecap='round' d='M7 8h10M7 12h10M7 16h6'/%3E%3C/svg%3E" alt="Tally.so" class="tool-icon"><span>Tally.so</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%23FB6A6A'/%3E%3Ctext x='3.5' y='17' font-family='Arial,sans-serif' font-weight='900' font-size='13' fill='white'%3Ekit%3C/text%3E%3C/svg%3E" alt="Kit / ConvertKit" class="tool-icon"><span>Kit / ConvertKit</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/stripe" alt="Stripe" class="tool-icon"><span>Stripe</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/shopify" alt="Shopify" class="tool-icon"><span>Shopify</span></div>
+    <!-- Publishing & Scheduling -->
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/substack" alt="Substack" class="tool-icon"><span>Substack</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="tool-icon icon-invert"><span>GitHub</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%2316A34A'/%3E%3Cpath fill='white' d='M12 4l7 9h-4.5v7h-5v-7H5z'/%3E%3C/svg%3E" alt="OneUp" class="tool-icon"><span>OneUp</span></div>
+    <!-- Analytics -->
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube Studio" class="tool-icon"><span>YouTube Studio</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%236B46F1'/%3E%3Crect x='3.5' y='15' width='3.5' height='5.5' rx='1' fill='white' opacity='0.9'/%3E%3Crect x='8.5' y='11' width='3.5' height='9.5' rx='1' fill='white' opacity='0.95'/%3E%3Crect x='13.5' y='7' width='3.5' height='13.5' rx='1' fill='white'/%3E%3Crect x='18.5' y='3.5' width='2' height='17' rx='1' fill='white' opacity='0.6'/%3E%3Cpolyline points='5.25,15 10.25,11 15.25,7 19.5,3.5' fill='none' stroke='%23FFD700' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Metricool" class="tool-icon"><span>Metricool</span></div>
+    <!-- Productivity & Other -->
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='9' height='9' fill='%23F25022'/%3E%3Crect x='13' y='2' width='9' height='9' fill='%237FBA00'/%3E%3Crect x='2' y='13' width='9' height='9' fill='%2300A4EF'/%3E%3Crect x='13' y='13' width='9' height='9' fill='%23FFB900'/%3E%3C/svg%3E" alt="Microsoft Office" class="tool-icon"><span>Microsoft Office</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234285F4' d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'/%3E%3Cpath fill='%2334A853' d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'/%3E%3Cpath fill='%23FBBC05' d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'/%3E%3Cpath fill='%23EA4335' d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'/%3E%3C/svg%3E" alt="Google Workspace" class="tool-icon"><span>Google Workspace</span></div>
+    <div class="tool-tag"><img src="https://cdn.simpleicons.org/mailchimp" alt="Mailchimp" class="tool-icon"><span>Mailchimp</span></div>
+    <div class="tool-tag"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%23001e36'/%3E%3Ctext x='3.5' y='17.5' fill='%2331A8FF' font-size='12' font-weight='900' font-family='Arial%2C sans-serif'%3EPs%3C/text%3E%3C/svg%3E" alt="Adobe Photoshop" class="tool-icon"><span>Adobe Photoshop</span></div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);font-weight:700;font-size:1rem;margin-top:40px;margin-bottom:16px;letter-spacing:-0.02em;" class="reveal">Skills</h3>
+  <div class="skills-grid reveal">
+    <span class="skill-tag" data-tooltip="Full-funnel planning: positioning, content cadence, platform selection, and growth goals across all channels.">Social Media Strategy</span>
+    <span class="skill-tag" data-tooltip="Running paid campaigns on Meta, TikTok, and LinkedIn — from ad creative to budget allocation and ROAS optimization.">Paid Social Advertising</span>
+    <span class="skill-tag" data-tooltip="Writing and producing posts, reels, carousels, and stories built to perform natively on each platform.">Content Creation</span>
+    <span class="skill-tag" data-tooltip="Scripting, shooting direction, and editing for Reels, TikToks, and YouTube Shorts — hook to CTA.">Short-Form Video</span>
+    <span class="skill-tag" data-tooltip="Writing captions, scripts, CTAs, and ad copy that sounds like a real person and actually converts.">Copywriting</span>
+    <span class="skill-tag" data-tooltip="Content built for how each algorithm works — not the same post copy-pasted to every channel.">Platform-Native Content</span>
+    <span class="skill-tag" data-tooltip="Organic follower growth via profile optimization, strategic engagement, and content feedback loops.">Audience Growth</span>
+    <span class="skill-tag" data-tooltip="Pulling platform data, identifying trends, and translating metrics into concrete strategy adjustments.">Analytics &amp; Reporting</span>
+    <span class="skill-tag" data-tooltip="List building, segmentation, welcome flows, and campaign performance — primarily in Kit/ConvertKit.">Email Marketing</span>
+    <span class="skill-tag" data-tooltip="Full Meta Ads account management: campaign setup, audience targeting, creative testing, and optimization.">Meta Ads</span>
+    <span class="skill-tag" data-tooltip="Trend-aware planning, sound strategy, hashtag targeting, and Creator/Business account management.">TikTok Strategy</span>
+    <span class="skill-tag" data-tooltip="Reels strategy, hashtag research, Story flows, and profile conversion optimization for organic reach.">Instagram Growth</span>
+    <span class="skill-tag" data-tooltip="Thumbnail/title testing, SEO-optimized descriptions, community posts, and subscriber retention tactics.">YouTube Strategy</span>
+    <span class="skill-tag" data-tooltip="Keyword research, on-page optimization, meta descriptions, and content structured for search visibility.">SEO Fundamentals</span>
+    <span class="skill-tag" data-tooltip="Responding to comments, DMs, and reviews in the brand voice — turning followers into a real community.">Community Management</span>
+    <span class="skill-tag" data-tooltip="Live and experiential campaigns that bring a brand into physical spaces — like the Netflix activations.">Brand Activation</span>
+    <span class="skill-tag" data-tooltip="Identifying, vetting, and briefing creators for partnerships that fit the brand and the audience.">Influencer Collaboration</span>
+    <span class="skill-tag" data-tooltip="Coordinating multi-channel launches from brief to execution — timelines, assets, and performance tracking.">Campaign Management</span>
+    <span class="skill-tag" data-tooltip="Testing creative variations, headlines, and audiences to find what actually works, not what just sounds good.">A/B Testing</span>
+    <span class="skill-tag" data-tooltip="Contact management, pipeline tracking, and automation workflows inside HubSpot.">CRM / HubSpot</span>
+    <span class="skill-tag" data-tooltip="Building top-of-funnel systems — landing pages, lead magnets, and paid acquisition flows.">Lead Generation</span>
+    <span class="skill-tag featured" data-tooltip="Strategy for film, TV, music, and live events — understanding how the industry works, not just posting about it.">Entertainment Marketing</span>
+    <span class="skill-tag" data-tooltip="Pre-event buzz, live coverage, and post-event content cycles for in-person activations and launches.">Event Marketing</span>
+    <span class="skill-tag" data-tooltip="Visual and narrative direction for shoots and campaigns — from moodboard to final deliverable.">Creative Direction</span>
+    <span class="skill-tag" data-tooltip="Using Claude, ChatGPT, and Lovart.ai to accelerate content ideation, writing, and visual production.">Generative AI</span>
+    <span class="skill-tag" data-tooltip="Post-production in Final Cut Pro, CapCut, and Descript — cuts, captions, sound design, and pacing.">Video Editing</span>
+    <span class="skill-tag" data-tooltip="Building automations in Make.com to remove repetitive tasks from content and publishing operations.">Workflow Automation</span>
+    <span class="skill-tag" data-tooltip="Planning, writing, and growing a newsletter audience — from content pillars to subject line optimization.">Newsletter Strategy</span>
+    <span class="skill-tag" data-tooltip="Drip sequences, trigger-based flows, and behavioral segmentation for lead nurture and retention.">Email Automation</span>
+    <span class="skill-tag" data-tooltip="The backend of marketing: systems, tools, reporting, and process so the strategy holds under scale.">Marketing Operations</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label reveal">Contact</div>
+  <h2 class="contact-title reveal">Let's build<br>something</h2>
+  <div class="contact-word-wrap reveal" id="contactWords">
+    <span class="contact-word active">great.</span>
+    <span class="contact-word">bold.</span>
+    <span class="contact-word">real.</span>
+    <span class="contact-word">lasting.</span>
+    <span class="contact-word">new.</span>
+    <span class="contact-word">sharp.</span>
+    <span class="contact-word">valuable.</span>
+    <span class="contact-word">different.</span>
+    <span class="contact-word">memorable.</span>
+  </div>
+  <p class="contact-sub reveal">Whether you need a full social media strategy, content consulting, or just want to talk entertainment marketing.</p>
+  <div class="contact-links reveal">
+    <a href="https://dot.cards/nathanlane" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Contact Me</a>
+    <a href="https://www.linkedin.com/in/itsnathanlane" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+    <a href="https://instagram.com/itsnathanlane" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg> Instagram</a>
+    <a href="https://tiktok.com/@itsnathanlane" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg> TikTok</a>
+
+    <a href="https://pensight.com/x/itsnathanlane/60minconsultation" target="_blank" class="contact-link contact-link-cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg> 1-on-1 Consultation</a>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Nathan Lane. All rights reserved. &nbsp;&middot;&nbsp; <button class="footer-legal-btn" onclick="openLegal()">Legal</button></span>
+  <a href="https://theculturemarquee.substack.com" target="_blank" rel="noopener" class="footer-substack">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    The Culture Marquee
+  </a>
+  <span>Built in Las Vegas</span>
+</footer>
+
+<!-- ============ MODAL OVERLAY ============ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+// ==================== MODAL DATA ====================
+const caseStudies = {
+  netflixGrove: {
+    tag: 'Event Network &times; Netflix',
+    title: 'Netflix at The Grove<br>Netflix\'s First Transmedia Retail Experience',
+    intro: 'In fall 2022, Netflix opened its first-ever transmedia retail experience at The Grove in Los Angeles — a 10,000 sq ft two-floor flagship that brought Netflix\'s biggest IPs to life in a physical space. I was part of the team that launched and operated this pioneering experience through Event Network.',
+    stats: [
+      { val: '10,000 sq ft', label: 'Space' },
+      { val: 'First Ever', label: 'Netflix Retail' },
+      { val: 'Sep 2022', label: 'Launch' },
+      { val: 'VIP + Celebrity', label: 'Clientele' }
+    ],
+    sections: [
+      { title: 'What It Was', content: '<p>Netflix at The Grove was Netflix\'s first physical retail and brand experience — a two-floor interactive destination that went far beyond a typical merchandise store. Visitors could enroll at the School for Good and Evil, explore Enola Holmes\' office, take Bridgerton photo experiences, immerse themselves in Stranger Things activations, and shop exclusive merchandise tied to Netflix\'s biggest properties. It was a transmedia strategy made physical: streaming IP brought into real-world retail.</p>' },
+      { title: 'My Role', content: '<p>I co-led the floor team at this flagship launch — managing associate performance, coordinating day-to-day operations, and maintaining the elevated brand experience Netflix expected. A significant portion of the role involved VIP and celebrity client service, handling high-profile guests and making sure the experience met the premium standard Netflix set for this space. I was part of the team from the initial launch through the full operational run.</p>' },
+      { title: 'Why It Matters', content: '<p>This was Netflix putting a physical face on its digital-first brand for the first time. Being part of the team that launched and ran that store was a front-row seat to how one of the world\'s largest entertainment companies executes brand activation, transmedia IP strategy, and experiential retail at scale — lessons that directly inform how I think about brand experience today.</p>' }
+    ]
+  },
+  squidTrials: {
+    tag: 'Event Network &times; Netflix',
+    title: 'Squid Game: The Trials<br>Netflix\'s Immersive Live Activation',
+    intro: 'Squid Game: The Trials was one of Netflix\'s largest and most ambitious live entertainment activations — a full-scale immersive experience that put participants inside the world of Squid Game. I came back to the Event Network × Netflix team as Sales Lead for this one.',
+    stats: [
+      { val: 'Sales Lead', label: 'My Role' },
+      { val: 'Sold Out', label: 'Consistently' },
+      { val: 'Sep–Jan', label: '2023–2024' },
+      { val: 'VIP Service', label: 'High-Profile Guests' }
+    ],
+    sections: [
+      { title: 'About the Experience', content: '<p>Squid Game: The Trials took Netflix\'s global phenomenon and turned it into an in-person immersive experience — bringing fans physically inside the games from the show. It was one of Netflix\'s most high-profile live activations of the year: ticketed, immersive, with merchandise, VIP access, and a full brand experience built around one of the most recognizable IPs in the world.</p>' },
+      { title: 'My Role', content: '<p>As Sales Lead, I ran the front-line team across a high-volume, sold-out run. That meant managing team performance in real time, overseeing the merch and ticketing operation, and personally handling VIP client service for guests with intense attachment to the IP. The role required keeping both the team and the guest experience sharp across a long-running activation in a high-pressure environment.</p>' },
+      { title: 'Building on The Grove', content: '<p>Coming back for Squid Game: The Trials after the Netflix at The Grove launch meant I already understood how Event Network × Netflix operates and what the brand expects at the experiential level. This activation was a different scale — higher volume, higher stakes, and a more intense fanbase. Together, the two experiences gave me a complete picture of how Netflix approaches live brand activation from first-launch to high-scale execution.</p>' }
+    ]
+  },
+  realEstate: {
+    tag: 'Featured &mdash; Client Work',
+    title: 'Top Real Estate Company<br>Full-Stack Marketing Overhaul',
+    intro: 'Hired as the sole Social Media + Paid Ads Specialist and Creative Writer for a 50-year-old real estate training company. In under 8 weeks, I transformed their entire digital presence from a cross-posting operation into a data-driven, platform-native content engine spanning 8+ platforms, 200,000+ followers, a $167K+ ad account, and an 85,000-person email list.',
+    stats: [
+      { val: '1.5M+', label: 'Monthly Views' },
+      { val: '+1,400%', label: 'IG Reach' },
+      { val: '15,750', label: 'Followers/Mo' },
+      { val: '888K', label: 'IG Reached' },
+      { val: '769K', label: 'Viral Reel' },
+      { val: '$167K+', label: 'Ad Spend' }
+    ],
+    sections: [
+      { title: 'The Challenge', content: '<p>The company had 200,000+ followers across 8 platforms but no dedicated social media strategist. Content was cross-posted identically with no platform-native strategy, no performance tracking, and no conversion infrastructure. Monthly views hovered around 50K-100K. The $167K+ Meta Ads account lacked proper conversion tracking, and the 85,000-person email list had severe deliverability issues.</p>' },
+      { title: 'Social Media Results', content: '<div class="modal-grid-2"><div class="modal-detail-card"><h4>Instagram</h4><p>1,079,555 views in 30 days. 888K accounts reached (+1,400%). 137,700+ interactions. 95.6% from non-followers. +1,848 followers (+325%). 42,207 shares (+14,159%).</p></div><div class="modal-detail-card"><h4>Facebook</h4><p>Raised Reel average from 200-500 to 1,500-2,000+ baseline. 5+ Reels crossed 25K views, 3 surpassed 100K. +13,631 new followers in February.</p></div><div class="modal-detail-card"><h4>YouTube</h4><p>89,779 views (+153%). 130,313 minutes watched. 291 new subscribers. 865 shares (+61%). Driven by consistent short-form posting.</p></div><div class="modal-detail-card"><h4>TikTok</h4><p>Grew stagnant account from ~900 to 1,100+ followers, unlocking link-in-bio. +173% views, +715% shares, +254% profile views.</p></div></div><p>Also: <strong>LinkedIn</strong> hit 8.57% engagement rate. <strong>Stories</strong> went from 150-200 to ~500 average. Generated 24 inbound inquiries from Instagram in 30 days.</p>' },
+      { title: 'Paid Media', content: '<div class="modal-grid-2"><div class="modal-detail-card"><h4>Meta Ads (First Window)</h4><p>$1,455 spend across 4 campaigns. 65,880 reach. 150,856 impressions. 3,809 clicks. 196 coaching leads at $1.59/lead. $23,693 pipeline value.</p></div><div class="modal-detail-card"><h4>Lifetime Account</h4><p>$167,517 total spend across 150+ campaigns. 12.9M lifetime reach. 32.8M impressions. 274K link clicks. Top campaign: 14.17x ROAS.</p></div></div><p>Launched Google Performance Max campaigns. Audited Google Tag Manager, identified missing conversion tracking. Built audience segmentation with cold/warm/hot splits.</p>' },
+      { title: 'SEO &amp; Competitive Intel', content: '<p>Competitive keyword gap analysis across 39 high-intent keywords. Company had zero presence for high-volume coaching terms (720+ monthly searches) where competitors ranked. Mapped 24 branded "People Also Ask" questions into intent clusters.</p>' },
+      { title: 'Email &amp; HubSpot Overhaul', content: '<p>Discovered ~58,000 problem contacts out of 85,000+. Found 176 segments named after spreadsheet imports. Designed suppression list strategy, re-engagement campaign for 23,000+ dormant contacts, reduction to 8-10 evergreen active segments.</p>' },
+      { title: 'Content Systems Built', content: '<ul><li>Multi-platform strategy for Facebook, Instagram, TikTok, YouTube, LinkedIn, Threads, Pinterest</li><li>2-week rotating content calendar (Week A / Week B) with platform-specific content</li><li>AI-powered pipeline generating 15 clips/day from video archive</li><li>Content pillars: Sales Skills, Mindset, Events, Coaching Authority, Professional Standards</li><li>Hook banks, CTA banks, caption templates, and master brand reference document</li><li>30+ Canva template library and 6-phase lead magnet evaluation framework</li></ul>' }
+    ]
+  },
+  squidGames: {
+    tag: 'Academic Capstone Project',
+    title: 'Squid Games: The Trials<br>Social Media Strategy',
+    intro: 'For my graduation capstone at the LA Film School, I developed a comprehensive 4-month social media marketing strategy using Netflix\'s Squid Game: The Trials as the case study. This was an academic project demonstrating full-funnel marketing thinking applied to a major entertainment IP.',
+    visual: `<div class="modal-visual"><div class="modal-visual-label">Graduation Project</div><div class="img-showcase laptops"><img src="images/sg-title.png" alt="Squid Games: The Trials - Title Slide" loading="lazy"><img src="images/sg-overview.png" alt="Campaign Overview - 4 Month Strategy" loading="lazy"></div><div class="img-showcase laptops"><img src="images/sg-storytelling.png" alt="Interactive Storytelling Strategy" loading="lazy"><img src="images/sg-bts.png" alt="BTS Exclusive Content Drops Calendar" loading="lazy"></div><div class="img-showcase-caption">Slides from the full capstone presentation</div></div>`,
+    stats: [
+      { val: '4-Month', label: 'Timeline' },
+      { val: '3', label: 'Platforms' },
+      { val: 'Full Funnel', label: 'Approach' },
+      { val: 'Academic', label: 'Project Type' }
+    ],
+    sections: [
+      { title: 'Project Overview', content: '<p>Covered Instagram, TikTok, and YouTube with platform-specific content plans for each phase: pre-launch hype, launch week activation, sustained engagement, and post-event wrap-up. Every piece was designed to move audiences through the awareness-to-conversion funnel.</p>' },
+      { title: 'Key Deliverables', content: '<ul><li><strong>Dalgona Filter Concept:</strong> Interactive AR filter for Instagram and TikTok to drive organic UGC and shareability</li><li><strong>Influencer Playbook:</strong> Tiered strategy with macro, mid-tier, and micro creators including brief templates</li><li><strong>Content Calendar:</strong> Full 4-month editorial calendar with platform-native formats mapped to event milestones</li><li><strong>Audience Segmentation:</strong> From hardcore fans to general experience seekers, with tailored messaging</li><li><strong>Budget Framework:</strong> Paid media split across platforms with CPM estimates and ROAS projections</li></ul>' },
+      { title: 'Strategic Approach', content: '<p>Three core principles: platform-native thinking (what works on TikTok doesn\'t work on IG), entertainment-first content (leading with cultural relevance over hard selling), and conversion architecture (every piece had a clear funnel role). This project directly informed Lane Social Co. and the L.A.N.E. Framework.</p>' },
+      { title: 'View the Full Presentation', content: '<p>Want to see the complete strategy? Check out the full graduation project below.</p><a href="docs/squid-games-the-trials.pdf" target="_blank" class="pdf-view-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> View Full PDF Presentation</a>' }
+    ]
+  },
+  instagram: {
+    tag: 'Organic Client Results',
+    title: 'Instagram Profile<br>Optimization',
+    intro: 'Complete Instagram overhaul for small business clients through Lane Social Co. Transforming underperforming profiles into conversion-optimized brand presences using organic strategy only, with no paid spend.',
+    visual: `<div class="modal-visual"><div class="modal-visual-label">Real Results</div><div class="hf-badge" style="top:16px;left:8px;animation:hf-float-a 3.8s ease-in-out infinite;"><div class="hf-bars"><div class="hf-bar"></div><div class="hf-bar"></div><div class="hf-bar"></div><div class="hf-bar hi"></div><div class="hf-bar"></div><div class="hf-bar hi"></div><div class="hf-bar"></div></div><div class="hf-badge-text"><span class="hf-badge-val">1.5M+</span><span class="hf-badge-label">Monthly Views</span></div></div><div class="hf-badge" style="bottom:40px;right:8px;animation:hf-float-b 4.2s ease-in-out infinite;"><div class="hf-pulse"></div><div class="hf-badge-text"><span class="hf-badge-val">+1,400%</span><span class="hf-badge-label">IG Reach Growth</span></div></div><div class="img-showcase phones"><img src="images/ig-analytics-views.png" alt="Instagram Analytics - 1,079,555 Views" loading="lazy"><img src="images/ig-analytics-interactions.png" alt="Instagram Analytics - 137,721 Interactions" loading="lazy"></div><div class="img-showcase-caption">1M+ views and 137K+ interactions, 92.9% from non-followers</div></div>`,
+    stats: [
+      { val: '3x', label: 'Profile Growth' },
+      { val: '30 Days', label: 'Timeline' },
+      { val: '100%', label: 'Organic' },
+      { val: 'Full Audit', label: 'Included' }
+    ],
+    sections: [
+      { title: 'The Process', content: '<p>Every engagement started with a comprehensive profile audit covering bio effectiveness, visual consistency, highlight strategy, content mix, hashtag performance, and link-in-bio structure. Then a custom optimization roadmap tailored to each client\'s industry, audience, and goals.</p>' },
+      { title: 'What Changed', content: '<div class="modal-grid-2"><div class="modal-detail-card"><h4>Bio &amp; First Impression</h4><p>Rewrote bios to lead with value proposition. Added clear CTAs and strategic keyword placement for search discovery.</p></div><div class="modal-detail-card"><h4>Content Grid</h4><p>From random posting to intentional grid aesthetics with consistent branding, content pillars, and strategic Reels/carousels.</p></div><div class="modal-detail-card"><h4>Highlights Strategy</h4><p>Rebuilt as a mini-website: About, Services, Testimonials, FAQ, and a clear purchase/inquiry path.</p></div><div class="modal-detail-card"><h4>Link-in-Bio Funnel</h4><p>Replaced generic Linktree with conversion-optimized pages featuring prioritized CTAs and tracking parameters.</p></div></div>' },
+      { title: 'Results', content: '<p>Average <strong>3x profile visit growth</strong> within 30 days, driven entirely by organic discovery. Search-optimized bios, consistent posting, and strategic hashtags meant profiles surfaced in Explore and Search at significantly higher rates.</p>' }
+    ]
+  },
+  tiktok: {
+    tag: 'Organic Growth Case Study',
+    title: 'TikTok Content<br>Growth Engine',
+    intro: 'Built and executed a TikTok growth strategy for a real estate training brand with a stagnant, neglected account. Through strategic content planning, trend analysis, and algorithm-optimized posting, turned it into a genuine growth channel.',
+    visual: `<div class="modal-visual"><div class="modal-visual-label">TikTok Analytics Dashboard</div><div class="hf-badge" style="top:16px;right:8px;animation:hf-float-c 4.6s ease-in-out infinite;"><div class="hf-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="hf-badge-text"><span class="hf-badge-val">200K+</span><span class="hf-badge-label">Followers Managed</span></div></div><div class="hf-badge" style="bottom:40px;left:8px;animation:hf-float-d 3.4s ease-in-out infinite;"><div class="hf-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div class="hf-badge-text"><span class="hf-badge-val">$167K+</span><span class="hf-badge-label">Ad Spend Managed</span></div></div><div class="img-showcase phones"><img src="images/tiktok-analytics-1.png" alt="TikTok Analytics - 1.2M Video Views, 113K Likes" loading="lazy"><img src="images/tiktok-analytics-2.png" alt="TikTok Analytics - 948K Unique Viewers, 13K Shares" loading="lazy"></div><div class="img-showcase-caption">Actual analytics from the first 30 days of strategic content</div></div>`,
+    stats: [
+      { val: '12,000%+', label: 'View Growth' },
+      { val: '948K', label: 'Unique Viewers' },
+      { val: '113K', label: 'Total Likes' },
+      { val: '+715%', label: 'Shares' }
+    ],
+    sections: [
+      { title: 'Starting Point', content: '<p>~900 followers, effectively dormant. Cross-posted content with no TikTok-native formatting, no trending audio, no algorithm understanding. Lacked link-in-bio because it hadn\'t hit the follower threshold.</p>' },
+      { title: 'Strategy', content: '<ul><li><strong>AI Clip Pipeline:</strong> 15 TikTok-native clips daily from the brand\'s video archive</li><li><strong>Hook-First Editing:</strong> Re-edited with 1-3 second hooks, text overlays, native captions</li><li><strong>Trending Audio:</strong> Mapped relevant sounds to content pillars for systematic trend-riding</li><li><strong>Optimized Cadence:</strong> Tested posting times, frequency, and content mix ratios</li><li><strong>Engagement Tactics:</strong> Comment response strategy, duet/stitch opportunities, community interaction</li></ul>' },
+      { title: 'Results', content: '<p>Grew to 1,100+ followers, crossing the link-in-bio threshold and turning TikTok into a conversion channel. Video views +173%, shares +715%, profile views +254%. The 12,000%+ view growth represents transformation from near-zero to consistent performance.</p>' }
+    ]
+  },
+  neonNight: {
+    tag: 'Live Entertainment Campaign',
+    title: 'Neon Night<br>Event Campaign',
+    intro: 'Full paid campaign design for a live entertainment event at the LA Film School. TikTok ads, Snapchat placements, Instagram Stories, and a custom Ticketmaster listing — every channel built platform-native for a Gen Z audience, with distinct creative for each placement.',
+    visual: `<div class="modal-visual"><div class="modal-visual-label">Multi-Platform Ad Campaign</div><div class="img-showcase"><img src="images/neon-ticketmaster.png" alt="Neon Night Ticketmaster Listing" loading="lazy" style="height:480px;width:auto;border-radius:10px;display:block;position:relative;z-index:1;margin-right:-32px;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.18))"><video src="images/neon-night-ad.mp4" autoplay loop muted playsinline style="height:480px;width:auto;border-radius:10px;display:block;position:relative;z-index:2;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.22))" aria-label="Neon Night Instagram Ad Slideshow"></video></div><div class="img-showcase-caption">Ticketmaster listing mockup and Instagram ad slideshow</div></div>`,
+    stats: [
+      { val: '4', label: 'Ad Platforms' },
+      { val: 'Gen Z', label: 'Target Audience' },
+      { val: 'Ticketmaster', label: 'Live Listing' },
+      { val: 'Paid', label: 'Campaign Type' }
+    ],
+    sections: [
+      { title: 'Campaign Concept', content: '<p>Neon Night was a high-energy, visually striking event that lent itself naturally to social amplification. The campaign leaned into this by designing every touchpoint for shareability. The neon aesthetic provided a strong visual identity that translated across platforms.</p>' },
+      { title: 'Platform Strategy', content: '<div class="modal-grid-2"><div class="modal-detail-card"><h4>TikTok</h4><p>Behind-the-scenes content, countdown series, creator partnerships, and a branded sound concept tied to the event theme.</p></div><div class="modal-detail-card"><h4>Snapchat</h4><p>Custom geofilter for the venue, snap-to-unlock promotions, and ephemeral FOMO-driven story content.</p></div></div>' },
+      { title: 'Key Takeaway', content: '<p>Reinforced the importance of designing content for the platform, not just the message. The same event promoted completely differently on TikTok vs Snapchat, with each platform\'s native behaviors dictating the creative execution.</p>' }
+    ]
+  }
+};
+
+// ==================== MODAL FUNCTIONS ====================
+function openModal(key) {
+  const data = caseStudies[key];
+  if (!data) return;
+  let statsHtml = data.stats.map(s => `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-label">${s.label}</div></div>`).join('');
+  let sectionsHtml = data.sections.map(s => `<div class="modal-section"><h3>${s.title}</h3>${s.content}</div>`).join('');
+  let visualHtml = data.visual || '';
+  document.getElementById('modalContent').innerHTML = `
+    <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back</button>
+    <div class="modal-tag">${data.tag}</div>
+    <h2 class="modal-title">${data.title}</h2>
+    <p class="modal-intro">${data.intro}</p>
+    ${visualHtml}
+    <div class="modal-stats-row">${statsHtml}</div>
+    ${sectionsHtml}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+function openLegal() {
+  document.getElementById('modalContent').innerHTML = `
+    <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="modal-tag">Nathan Lane Portfolio</div>
+    <h2 class="modal-title">Legal &amp; Disclaimers</h2>
+    <div class="legal-body">
+      <p>This portfolio is an independent professional showcase. The information below outlines the context of work presented, intellectual property rights, and third-party brand relationships.</p>
+
+      <p><span class="legal-heading">Third-Party Trademarks &amp; Brand References.</span> All brand names, logos, trademarks, and registered trademarks referenced or visually represented on this site — including but not limited to Netflix, A24, Instagram, TikTok, Squid Game, and any other entertainment, media, or technology companies — are the exclusive property of their respective owners. Their appearance on this site is solely to describe professional experience and does not imply sponsorship, endorsement, or any formal affiliation with those companies.</p>
+
+      <p><span class="legal-heading">No Employment or Affiliation Claims.</span> Work described in connection with Netflix activations was performed through Event Network, an authorized third-party operator contracted by Netflix to staff and operate experiential retail and event installations. Nathan Lane was employed by or contracted through Event Network — not Netflix directly. No claim of direct employment, partnership, or formal affiliation with Netflix or any other featured brand is made or implied.</p>
+
+      <p><span class="legal-heading">Academic &amp; Speculative Projects.</span> Some case studies on this site represent academic exercises, speculative strategy projects, or independent analyses completed as part of coursework or professional development. These projects were not commissioned by the named brands and do not reflect official campaigns, internal data, or proprietary brand strategy. They are presented solely to demonstrate strategic thinking and marketing capabilities.</p>
+
+      <p><span class="legal-heading">Portfolio Content &amp; Original Work.</span> All original written content, strategy frameworks (including the LANE Framework), copy, and creative direction produced by Nathan Lane on this site are &copy; 2026 Nathan Lane / Lane Social Co. Reproduction, redistribution, or repurposing of original content without written permission is prohibited. Case study descriptions are written from personal professional recollection and may not reflect the views or data of any associated brand or employer.</p>
+
+      <p><span class="legal-heading">Affiliate &amp; Partnership Disclosure.</span> In accordance with the Federal Trade Commission (FTC) guidelines (16 CFR Part 255), this site may contain affiliate links and content created in connection with paid or unpaid partnerships. When you click an affiliate link and make a purchase or sign up for a service, Nathan Lane may receive a small commission at no additional cost to you. Some content on this site may also be produced as part of sponsored partnerships, brand collaborations, or ambassador programs. Where a material connection exists between Nathan Lane and a brand, product, or service mentioned on this site — including but not limited to financial compensation, free products, or any other consideration — that relationship will be disclosed. All opinions, recommendations, and analysis expressed on this site are the author's own and are not dictated by any advertiser, sponsor, or affiliate partner. The inclusion of affiliate links or partnership content does not influence editorial judgment. Nathan Lane is not responsible for the content, accuracy, privacy practices, or terms of service of any third-party websites linked from this site.</p>
+
+      <p><span class="legal-heading">Contact &amp; Legal Inquiries.</span> For any intellectual property concerns, permissions requests, or legal inquiries, please reach out directly via the contact section of this site or at the email address listed therein.</p>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+
+
+
+// ==================== NAV SCROLL ====================
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ==================== HAMBURGER ====================
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ==================== THEME TOGGLE ====================
+const toggle = document.getElementById('themeToggle');
+const sunIcon = toggle.querySelector('.sun-icon');
+const moonIcon = toggle.querySelector('.moon-icon');
+const moonHint = toggle.querySelector('.moon-hint');
+const sunHint = toggle.querySelector('.sun-hint');
+function setTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  sunIcon.style.display = dark ? 'none' : 'block';
+  moonIcon.style.display = dark ? 'block' : 'none';
+  moonHint.style.display = dark ? 'none' : 'block';
+  sunHint.style.display = dark ? 'block' : 'none';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+toggle.addEventListener('click', () => {
+  setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+});
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') setTheme(true);
+else if (saved === 'light') setTheme(false);
+else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true);
+
+// ==================== ANIMATED HERO WORDS ====================
+const words = document.querySelectorAll('.hero-word');
+let currentWord = 0;
+setInterval(() => {
+  const prev = currentWord;
+  words[prev].classList.remove('active');
+  words[prev].classList.add('exit');
+  currentWord = (currentWord + 1) % words.length;
+  words[currentWord].classList.remove('exit');
+  words[currentWord].classList.add('active');
+  setTimeout(() => words[prev].classList.remove('exit'), 400);
+}, 2400);
+
+// ==================== CONTACT ROTATING WORDS ====================
+const contactWords = document.querySelectorAll('.contact-word');
+let currentContactWord = 0;
+setInterval(() => {
+  const prev = currentContactWord;
+  contactWords[prev].classList.remove('active');
+  contactWords[prev].classList.add('exit');
+  currentContactWord = (currentContactWord + 1) % contactWords.length;
+  contactWords[currentContactWord].classList.remove('exit');
+  contactWords[currentContactWord].classList.add('active');
+  setTimeout(() => contactWords[prev].classList.remove('exit'), 400);
+}, 2200);
+
+// ==================== SCROLL REVEALS ====================
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
+// Fallback: force all reveals visible on load in case observer misfires
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 300);
+});
+
+// ==================== ANIMATED COUNTERS ====================
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-count'));
+  const prefix = el.getAttribute('data-prefix') || '';
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+    if (target >= 1000000) el.textContent = prefix + (current / 1000000).toFixed(1) + 'M';
+    else if (target >= 1000) el.textContent = prefix + Math.round(current / 1000) + 'K+';
+    else el.textContent = prefix + current.toLocaleString();
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObserver.observe(el));
+
+</script>
+</body>
+</html>
